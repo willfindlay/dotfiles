@@ -1,13 +1,9 @@
 .PHONY: install
-install: vim vimrc vimskeletons
+install: nvim vimskeletons
 
-.PHONY: vim
+.PHONY: nvim
 vim:
-	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .vim/ $(HOME)/.vim/
-
-.PHONY: vimrc
-vimrc:
-	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .vimrc $(HOME)/.vimrc
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .config/nvim/ $(HOME)/.config/nvim/
 
 .PHONY: vimskeletons
 vimskeletons:
