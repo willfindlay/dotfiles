@@ -38,3 +38,9 @@ The targets in the Makefile use the rsync command to overwrite existing
 file and directories. I have set up a special backups directory in this
 project where rsync will copy existing files before overwriting them;
 however, you should still exercise caution before running make install.
+
+Acknowledgements
+================
+
+These dotfiles are partially based on Jon Gjengset's config files.
+You can find them here: https://github.com/jonhoo/configs
