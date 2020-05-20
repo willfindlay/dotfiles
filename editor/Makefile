@@ -3,12 +3,12 @@ install: vim vimrc vimskeletons
 
 .PHONY: vim
 vim:
-	rsync -a .vim/ $(HOME)/.vim/
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .vim/ $(HOME)/.vim/
 
 .PHONY: vimrc
 vimrc:
-	rsync -a .vimrc $(HOME)/.vimrc
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .vimrc $(HOME)/.vimrc
 
 .PHONY: vimskeletons
 vimskeletons:
-	rsync -a .vimskeletons/ $(HOME)/.vimskeletons/
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .vimskeletons/ $(HOME)/.vimskeletons/

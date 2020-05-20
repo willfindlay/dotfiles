@@ -3,4 +3,4 @@ install: localbin
 
 .PHONY: localbin
 localbin:
-	rsync -a .local/ $(HOME)/.local/
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .local/ $(HOME)/.local/

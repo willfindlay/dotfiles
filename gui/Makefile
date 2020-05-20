@@ -3,10 +3,10 @@ install: general xprofile
 
 .PHONY: general
 general:
-	rsync -a .config/ $(HOME)/.config/
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .config/ $(HOME)/.config/
 
 .PHONY: xprofile
 xprofile:
-	rsync -a .screenlayout/ $(HOME)/.screenlayout/
-	rsync -a .xprofile $(HOME)/.xprofile
-	rsync -a .xbindkeysrc $(HOME)/.xbindkeysrc
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .screenlayout/ $(HOME)/.screenlayout/
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .xprofile $(HOME)/.xprofile
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .xbindkeysrc $(HOME)/.xbindkeysrc
