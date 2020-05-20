@@ -2,7 +2,7 @@
 install: nvim vimskeletons
 
 .PHONY: nvim
-vim:
+nvim:
 	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .config/nvim/ $(HOME)/.config/nvim/
 
 .PHONY: vimskeletons
