@@ -8,7 +8,6 @@ git:
 .PHONY: zsh
 zsh:
 	rsync -a .zshrc $(HOME)/.zshrc
-	rsync -a .zsh-syntax-highlighting.zsh $(HOME)/.zsh-syntax-highlighting.zsh
 
 .PHONY: tmux
 tmux:
