@@ -8,6 +8,7 @@ git:
 	@echo
 	@echo "In particular, please consider making the following changes:"
 	@diff -u config clean-config
+	@echo "Alternatively, replace .config/git/config with .config/git/clean-config"
 	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .config/git/ $(HOME)/.config/git/
 
 .PHONY: zsh
