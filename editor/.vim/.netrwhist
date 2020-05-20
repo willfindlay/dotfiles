@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/housedhorse/documents/school/COMP4109/final/study.rmd'
+let g:netrw_dirhist_4='/home/housedhorse/documents/school/COMP4109/final'
+let g:netrw_dirhist_3='/home/housedhorse/documents/school/COMP4109/final/study.rmd'
+let g:netrw_dirhist_2='/home/housedhorse/documents/school/COMP4109/final'
+let g:netrw_dirhist_1='/home/housedhorse/documents/school/COMP4109/final/study.rmd'
