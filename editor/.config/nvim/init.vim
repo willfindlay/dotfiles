@@ -471,7 +471,14 @@ hi CursorLineNr cterm=NONE ctermfg=7 ctermbg=NONE
 " Color column
 hi ColorColumn cterm=NONE ctermbg=19
 
+" Fix signcolumn
 hi SignColumn ctermbg=NONE
+
+" Diff Colors
+hi DiffAdd ctermbg=235 ctermfg=108 cterm=reverse guibg=#262626 guifg=#87af87 gui=reverse
+hi DiffChange ctermbg=235 ctermfg=103 cterm=reverse guibg=#262626 guifg=#8787af gui=reverse
+hi DiffDelete ctermbg=235 ctermfg=131 cterm=reverse guibg=#262626 guifg=#af5f5f gui=reverse
+hi DiffText ctermbg=235 ctermfg=208 cterm=reverse guibg=#262626 guifg=#ff8700 gui=reverse
 
 " }}}
 " Compiler -------------------------------------------------------------- {{{

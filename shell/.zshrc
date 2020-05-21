@@ -198,6 +198,9 @@ export FZF_DEFAULT_COMMAND='find .'
 # zsh syntax highlighting
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+alias vimdiff='nvim -d'
+alias vdiff='nvim -d'
+
 # grep and cousins
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
