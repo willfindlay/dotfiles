@@ -49,9 +49,9 @@ call plug#begin()
 Plug 'ciaranm/securemodelines'
 
 " Status line
-Plug 'itchyny/lightline.vim'
-"Plug 'willfindlay/vim-airline-themes.git'
-"Plug 'vim-airline/vim-airline.git'
+"Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
 
 " Highlight yanks
 Plug 'machakann/vim-highlightedyank'
@@ -299,28 +299,28 @@ let g:ctrlp_match_current_file = 1
 let g:ctrlp_open_new_file = 'r'
 " }}}
 " Airline {{{
-"let g:airline_theme='onedark'
-"let g:airline_powerline_fonts = 0
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 0
-"let g:airline#extensions#tabline#buffer_idx_mode = 1
-"let g:airline#extensions#tabline#formatter = 'buffers'
-"
-"if !exists('g:airline_symbols')
-"    let g:airline_symbols = {}
-"endif
-"
-"" airline symbols
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = '☰'
-"let g:airline_symbols.maxlinenr = ' ln'
-"let g:airline_symbols.dirty = ' !'
-"let g:airline_symbols.notexists = ' +'
+let g:airline_theme='base16_gruvbox_dark_hard'
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#formatter = 'buffers'
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ' ln'
+let g:airline_symbols.dirty = ' !'
+let g:airline_symbols.notexists = ' +'
 " }}}
 " NERDTree {{{
 
@@ -778,15 +778,24 @@ tnoremap <C-W><C-UP> <C-\><C-n><C-W>k
 tnoremap <C-W><C-DOWN> <C-\><C-n><C-W>j
 
 " hotkeys to switch to tab indices
-nnoremap <leader>1 1gt
-nnoremap <leader>2 2gt
-nnoremap <leader>3 3gt
-nnoremap <leader>4 4gt
-nnoremap <leader>5 5gt
-nnoremap <leader>6 6gt
-nnoremap <leader>7 7gt
-nnoremap <leader>8 8gt
-nnoremap <leader>9 9gt
+"nnoremap <leader>1 1gt
+"nnoremap <leader>2 2gt
+"nnoremap <leader>3 3gt
+"nnoremap <leader>4 4gt
+"nnoremap <leader>5 5gt
+"nnoremap <leader>6 6gt
+"nnoremap <leader>7 7gt
+"nnoremap <leader>8 8gt
+"nnoremap <leader>9 9gt
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
 
 " quickly switch between buffers
 nnoremap <leader>b :bn<cr>
