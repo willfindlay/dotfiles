@@ -770,18 +770,28 @@ tnoremap <C-W><C-RIGHT> <C-\><C-n><C-W>l
 tnoremap <C-W><C-UP> <C-\><C-n><C-W>k
 tnoremap <C-W><C-DOWN> <C-\><C-n><C-W>j
 
-" hotkeys to switch to buffer indexes in Airline
-nmap <leader>1 1gt
-nmap <leader>2 2gt
-nmap <leader>3 3gt
-nmap <leader>4 4gt
-nmap <leader>5 5gt
-nmap <leader>6 6gt
-nmap <leader>7 7gt
-nmap <leader>8 8gt
-nmap <leader>9 9gt
-nmap <leader>bn :bn<CR>
-nmap <leader>bp :bp<CR>
+" hotkeys to switch to tab indices
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+
+" quickly switch between buffers
+nnoremap <leader>b :bn<cr>
+nnoremap <leader><S-B> :bp<cr>
+nnoremap <leader>n :bn<cr>
+nnoremap <leader>p :bp<cr>
+nnoremap <leader>d :bd<cr>
+nnoremap <leader>; :buffers<cr>:buffer<space>
+
+" quickly switch between tabs
+nnoremap <leader>t gt
+nnoremap <leader><S-T> gT
 
 " move folds by arrow keys
 nnoremap z<UP> zk
