@@ -256,7 +256,7 @@ bindsym --release Mod1+z exec --no-startup-id scrot ~/pictures/screenshots/%m-%d
 workspace_auto_back_and_forth yes
 
 # Custom wallpaper
-exec_always setbg
+exec_always $HOME/.local/bin/setbg
 
 # Compton for opacity
 exec --no-startup-id picom -b --backend glx --vsync
