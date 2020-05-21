@@ -70,6 +70,7 @@ bindkey '^[[Z' reverse-menu-complete
 # Disable ctrl s
 stty -ixon
 
+
 # =========================================================================== #
 # Aliases                                                                     #
 # =========================================================================== #
@@ -208,9 +209,9 @@ alias vimdiff='nvim -d'
 alias vdiff='nvim -d'
 
 # grep and cousins
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+#alias grep='grep --color=auto'
+#alias fgrep='fgrep --color=auto'
+#alias egrep='egrep --color=auto'
 
 # dmesg
 alias dmesg='dmesg --color=always'
