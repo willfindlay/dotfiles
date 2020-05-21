@@ -107,6 +107,12 @@ else
     alias ll='ls -la'
 fi
 
+# Map grep to ripgrep if it exists
+if command -v rg > /dev/null
+then
+    alias grep='rg'
+fi
+
 # R convenience
 alias r='R'
 alias rscript='Rscript'
