@@ -187,6 +187,8 @@ export GOPATH=$HOME/.local/go
 # Pipenv in project folder
 export PIPENV_VENV_IN_PROJECT=1
 
+export FZF_DEFAULT_COMMAND='find .'
+
 
 # =========================================================================== #
 # Color support                                                               #
