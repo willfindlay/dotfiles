@@ -30,7 +30,7 @@ silent !mkdir -p /tmp/tags
 set inccommand=nosplit
 "set relativenumber
 set colorcolumn=80
-set spellfile=~/.vim/spell/en.utf-8.add
+set spellfile=~/.config/nvim/en.utf-8.add
 
 " Formatting options specific to rmd, md, and tex files
 au FileType rmd setlocal indentexpr=""
@@ -64,7 +64,8 @@ Plug 'airblade/vim-rooter'
 
 " Fuzzy finder
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf.vim'
+Plug 'kien/ctrlp.vim'
 
 " Intellisense in vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -368,7 +369,7 @@ let g:black_skip_string_normalization = 1
 let g:highlightedyank_highlight_duration = 500
 " }}}
 " Vim Fzf {{{
-nnoremap <C-P> :<C-U>FZF<CR>
+"nnoremap <C-P> :<C-U>FZF<CR>
 " }}}
 
 " }}}
