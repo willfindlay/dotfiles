@@ -1,0 +1,37 @@
+#! /usr/bin/env sh
+
+# Based on Luke Smith's script of the same name
+#   https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/setbg
+
+# This script does the following:
+#	Run by itself, set the wallpaper (at X start).
+#	If given a file, set that as the new wallpaper.
+#	If given a subdirectory of $WALLPAPERDIR, choose random file in it.
+#	If wal is installed, also generate a colorscheme.
+
+CACHEDIR=${XDG_CACHE_HOME:-$HOME/.cache}
+CONFIGDIR=$HOME/.config
+WALLPAPERDIR=$CONFIGDIR/wallpapers
+BGLOC="$CACHEDIR/bg"
+
+NOTIF_DELAY=1000
+
+# User specified a file
+[ -f "$1" ] &&
+    ln -snfr "$(readlink -f "$1")" "$BGLOC" &&
+    notify-send -i $(readlink -f "$BGLOC") "Changed wallpaper!" "$(readlink -f "$BGLOC")"
+
+# User specified a file relative to $WALLPAPERDIR
+[ ! -z "$1" ] && [ -f "$WALLPAPERDIR/$1" ] &&
+    ln -snfr "$(readlink -f "$WALLPAPERDIR/$1")" "$BGLOC" &&
+    notify-send -t $NOTIF_DELAY -i $(readlink -f "$BGLOC") "Changed wallpaper!" "$(readlink -f "$BGLOC")"
+
+# User specified a subdirectory relative to $WALLPAPERDIR
+[ ! -z "$1" ] && [ -d "$WALLPAPERDIR/$1" ] &&
+    ln -snfr "$(find "$(readlink -f "$WALLPAPERDIR/$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$BGLOC" && notify-send -t $NOTIF_DELAY -i $(readlink -f "$BGLOC") "Random wallpaper chosen!" "$(readlink -f "$BGLOC")."
+
+# If pywal is installed and user specified PYWAL, use it
+[ ! -z $PYWAL ] && [ -x $(which wal 2>/dev/null) ] &&  echo "Running pywal..." &&
+wal -s -i "$(readlink -f "$BGLOC")" >/dev/null 2>&1 #-o "$CONFIGDIR/wal/postrun"
+
+xwallpaper --zoom "$BGLOC"
