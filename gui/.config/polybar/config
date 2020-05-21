@@ -8,17 +8,49 @@
 ;=====================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-;background = #222
-background = #f31a1a1a
-;background-alt = #444
-background-alt = rgba(0,0,0,0)
-;foreground = ${xrdb:color7:#222}
-foreground     = #f3f3f3
-foreground-alt = #7587a6
-primary        = #7587a6
-secondary      = #dd82e6
-alert          = #7587a6
+; Xresources with fallback
+;black       =  ${xrdb:color0:#282c34}
+;darkred     =  ${xrdb:color1:#be5046}
+;darkgreen   =  ${xrdb:color2:#7a9f60}
+;darkyellow  =  ${xrdb:color3:#d19a66}
+;darkblue    =  ${xrdb:color4:#3b84c0}
+;darkmagenta =  ${xrdb:color5:#9a52af}
+;darkcyan    =  ${xrdb:color6:#3c909b}
+;grey        =  ${xrdb:color7:#828997}
+;darkgrey    =  ${xrdb:color8:#5c6370}
+;red         =  ${xrdb:color9:#e06c75}
+;green       = ${xrdb:color10:#98c379}
+;yellow      = ${xrdb:color11:#e5c07b}
+;blue        = ${xrdb:color12:#61afef}
+;magenta     = ${xrdb:color13:#c678dd}
+;cyan        = ${xrdb:color14:#58c2e6}
+;white       = ${xrdb:color15:#abb2bf}
+; Normal colors
+black       = #1d2021
+darkred     = #fb4934
+darkgreen   = #b8bb26
+darkyellow  = #fabd2f
+darkblue    = #83a598
+darkmagenta = #d3869b
+darkcyan    = #8ec07c
+grey        = #d5c4a1
+darkgrey    = #665c54
+red         = #fb4934
+green       = #b8bb26
+yellow      = #fabd2f
+blue        = #83a598
+magenta     = #d3869b
+cyan        = #8ec07c
+white       = #fbf1c7
+
+; Set based on the above
+background     = ${colors.black}
+background-alt = ${colors.black}
+foreground     = ${colors.white}
+foreground-alt = ${colors.white}
+primary        = ${colors.white}
+secondary      = ${colors.magenta}
+alert          = ${colors.darkgrey}
 
 [bar/bar]
 monitor = ${env:MONITOR:}
@@ -34,10 +66,10 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 3
-line-color = #f00
+line-color = ${colors.background}
 
 border-size = 0
-border-color = #00000000
+border-color = ${colors.background}
 
 padding-left = 0
 padding-right = 2
@@ -53,7 +85,7 @@ font-3 = "unifont:fontformat=truetype:size=18:antialias=false;0"
 
 modules-left = i3
 modules-center =
-modules-right = filesystem volume cpu memory temperature eth date powermenu
+modules-right = filesystem volume backlight-acpi battery cpu memory temperature wlan eth date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -102,7 +134,7 @@ mount-0 = /
 
 label-mounted = %{F#7587a6}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+label-unmounted-foreground = ${colors.red}
 
 [module/bspwm]
 type = internal/bspwm
@@ -133,7 +165,7 @@ wrapping-scroll = false
 pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #000
+label-mode-foreground = ${colors.background}
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
@@ -175,15 +207,15 @@ type = internal/xbacklight
 
 format = <label> <bar>
 label = 
-label-foreground = ${colors.foreground-alt}
+label-foreground = ${colors.yellow}
 
 bar-width = 10
 bar-indicator = |
-bar-indicator-foreground = #ff
+bar-indicator-foreground = ${colors.foreground}
 bar-indicator-font = 2
 bar-fill = ─
 bar-fill-font = 2
-bar-fill-foreground = #9f78e1
+bar-fill-foreground = ${colors.darkyellow}
 bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
@@ -197,7 +229,7 @@ card = intel_backlight
 type = internal/cpu
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.darkcyan}
 ;format-underline = #f90000
 label = %percentage%%
 
@@ -205,7 +237,7 @@ label = %percentage%%
 type = internal/memory
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.darkmagenta}
 ; format-underline = #4bffdc
 label = %percentage_used%%
 
@@ -215,7 +247,7 @@ interface = wlp58s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
+#format-connected-underline = #9f78e1
 label-connected = %essid%
 
 format-disconnected =
@@ -229,7 +261,8 @@ ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
+#ramp-signal-foreground = ${colors.magenta}
+ramp-signal-foreground = ${colors.darkyellow}
 
 [module/eth]
 type = internal/network
@@ -237,7 +270,7 @@ interface = enp0s31f6
 interval = 3.0
 
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix-foreground = ${colors.darkyellow}
 label-connected = %local_ip%
 
 format-disconnected =
@@ -257,7 +290,7 @@ time = %I:%M %p
 time-alt = %I:%M %p
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.yellow}
 ;format-underline = #0a6cf5
 
 label = %date% %time%
@@ -268,24 +301,27 @@ type = internal/volume
 format-volume = <ramp-volume> <bar-volume>
 label-volume = VOL
 label-volume-foreground = ${colors.foreground-alt}
-ramp-volume-foreground = ${colors.foreground-alt}
+ramp-volume-foreground = ${colors.darkgreen}
 
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = " muted"
+format-muted-foreground = ${colors.darkred}
+label-muted = " muted"
 
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
 
 bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
+bar-volume-foreground-0 = ${colors.green}
+bar-volume-foreground-1 = ${colors.green}
+bar-volume-foreground-2 = ${colors.green}
+bar-volume-foreground-3 = ${colors.green}
+bar-volume-foreground-4 = ${colors.green}
+bar-volume-foreground-5 = ${colors.green}
+bar-volume-foreground-6 = ${colors.yellow}
+bar-volume-foreground-7 = ${colors.yellow}
+bar-volume-foreground-8 = ${colors.red}
+bar-volume-foreground-9 = ${colors.red}
+bar-volume-gradient = true
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
@@ -301,33 +337,33 @@ adapter = AC
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+#format-charging-underline = #ffb52a
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+#format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-full-prefix-foreground = ${colors.green}
+#format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = ${colors.darkblue}
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = ${colors.green}
 animation-charging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 8
 warn-temperature = 80
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
 
 format = <ramp> <label>
 ;format-underline = #f50a4d
@@ -336,14 +372,15 @@ format-warn = <ramp> <label-warn>
 
 label = %temperature%
 label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.darkred}
+ramp-warn-foreground = ${colors.darkred}
 
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
 ramp-3 = 
 ramp-4 = 
-ramp-foreground = ${colors.foreground-alt}
+ramp-foreground = ${colors.darkblue}
 
 [module/powermenu]
 type = custom/menu
@@ -354,7 +391,7 @@ format-spacing = 1
 
 label-open = 
 label-open-foreground = ${colors.secondary}
-label-close =  cancel
+label-close =  cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
