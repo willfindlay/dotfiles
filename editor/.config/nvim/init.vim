@@ -616,7 +616,6 @@ autocmd Filetype *
       \	if &omnifunc == "" |
       \		setlocal omnifunc=syntaxcomplete#Complete |
       \	endif
-
 " }}}
 " Destroy Infuriating Key Mappings -------------------------------------- {{{
 
@@ -772,15 +771,15 @@ tnoremap <C-W><C-UP> <C-\><C-n><C-W>k
 tnoremap <C-W><C-DOWN> <C-\><C-n><C-W>j
 
 " hotkeys to switch to buffer indexes in Airline
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>1 1gt
+nmap <leader>2 2gt
+nmap <leader>3 3gt
+nmap <leader>4 4gt
+nmap <leader>5 5gt
+nmap <leader>6 6gt
+nmap <leader>7 7gt
+nmap <leader>8 8gt
+nmap <leader>9 9gt
 nmap <leader>bn :bn<CR>
 nmap <leader>bp :bp<CR>
 
@@ -804,7 +803,7 @@ vnoremap <Space> za
 " Make zO recursively open whatever fold we're in, even if it's partially open.
 nnoremap zO zczO
 
-function! MyFoldText() " {{{
+function! MyFoldText()
     let line = getline(v:foldstart)
 
     let nucolwidth = &fdc + &number * &numberwidth
@@ -818,7 +817,7 @@ function! MyFoldText() " {{{
     let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
+endfunction
 set foldtext=MyFoldText()
 
 " }}}
