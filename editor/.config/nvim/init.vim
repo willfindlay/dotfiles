@@ -176,6 +176,9 @@ set wrap lbr
 
 set signcolumn=yes
 
+" Clang Formatter {{{
+let g:clang_format#auto_format = 1
+" }}}
 " Commentary {{{
 autocmd FileType pandoc setlocal commentstring=<!--\ %s\ -->
 " }}}
