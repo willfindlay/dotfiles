@@ -136,6 +136,12 @@ alias gah='git stash && git pull --rebase && git stash pop'
 alias yr='cal -y'
 alias rc='source $HOME/.zshrc'
 
+# rlwrap
+if command -v rlwrap > /dev/null
+then
+    alias scheme='rlwrap -r -c -f $HOME/.cache/mit_scheme_bindings.txt scheme'
+fi
+
 # =========================================================================== #
 # Functions                                                                   #
 # =========================================================================== #

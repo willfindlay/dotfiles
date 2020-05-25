@@ -68,7 +68,7 @@ Plug 'airblade/vim-rooter'
 Plug 'kien/ctrlp.vim'
 
 " Intellisense in vim
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Syntactic language support
 Plug 'cespare/vim-toml'
@@ -83,25 +83,49 @@ Plug 'godlygeek/tabular'
 
 " NerdTree
 Plug 'scrooloose/nerdtree'
-
-" TODO: organize these
-Plug 'tpope/vim-fugitive'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Python language support
+Plug 'jeetsukumaran/vim-pythonsense'
+Plug 'psf/black', { 'tag': '19.10b0' }
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+
+" Show colors
+Plug 'ap/vim-css-color'
+
+" LaTeX
+Plug 'lervag/vimtex'
+
+" Pandoc
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+
+" Mediawiki
 Plug 'chikamichi/mediawiki.vim'
+
+" Ctags integration
+Plug 'ludovicchabant/vim-gutentags'
+
+" Git support
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Tmux bindings
+Plug 'christoomey/vim-tmux-navigator'
+
+" Incremental search
+Plug 'haya14busa/incsearch.vim'
+
+" Useful Tim Pope plugins
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'ap/vim-css-color'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
-Plug 'haya14busa/incsearch.vim'
-Plug 'psf/black'
+
+" Utilsnips
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -176,6 +200,10 @@ set wrap lbr
 
 set signcolumn=yes
 
+" PythonDocstring {{{
+let g:pydocstring_doq_path = '/home/housedhorse/.local/bin/doq'
+let g:pydocstring_formatter = 'numpy'
+" }}}
 " Clang Formatter {{{
 let g:clang_format#auto_format = 1
 " }}}
@@ -187,7 +215,7 @@ autocmd FileType pandoc setlocal commentstring=<!--\ %s\ -->
 let g:coc_config_home='$HOME/.vim/'
 
 " Coc global extensions
-let g:coc_global_extensions = ['coc-python']
+let g:coc_global_extensions = ['coc-python', 'coc-snippets', 'coc-lists', 'coc-rls', 'coc-json', 'coc-go']
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -204,6 +232,12 @@ set updatetime=300
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
