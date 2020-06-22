@@ -123,9 +123,13 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-abolish'
 
-" Utilsnips
+" Snippets
 Plug 'honza/vim-snippets'
+
+" Multiple cursors
+Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
@@ -148,7 +152,7 @@ au CursorHold * checktime
 set clipboard=unnamedplus
 
 " timeout settings for mapped commands
-set notimeout
+"set notimeout
 set ttimeout
 set ttimeoutlen=10
 " mouse support
@@ -200,22 +204,40 @@ set wrap lbr
 
 set signcolumn=yes
 
+" Vimtex {{{
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_quickfix_enabled = 1
+" Disable overfull/underfull \hbox and all package warnings
+let g:vimtex_quickfix_latexlog = {
+      \ 'overfull' : 0,
+      \ 'underfull' : 0,
+      \ 'packages' : {
+      \   'default' : 0,
+      \ },
+      \}
+let g:vimtex_text_obj_enabled = 0
+" }}}
 " PythonDocstring {{{
+let g:pydocstring_enable_mapping = 0
 let g:pydocstring_doq_path = '/home/housedhorse/.local/bin/doq'
 let g:pydocstring_formatter = 'numpy'
 " }}}
 " Clang Formatter {{{
-let g:clang_format#auto_format = 1
+"let g:clang_format#auto_format = 1
+let g:clang_format#auto_format = 0
+let g:clang_format#style_options = {
+            \ 'AllowShortIfStatementsOnASingleLine': 'false',
+            \ 'AllowShortFunctionsOnASingleLine': 'false' }
 " }}}
 " Commentary {{{
 autocmd FileType pandoc setlocal commentstring=<!--\ %s\ -->
 " }}}
 " Coc {{{
 " change location of Coc config
-let g:coc_config_home='$HOME/.vim/'
+let g:coc_config_home='$HOME/.config/nvim'
 
 " Coc global extensions
-let g:coc_global_extensions = ['coc-python', 'coc-snippets', 'coc-lists', 'coc-rls', 'coc-json', 'coc-go']
+let g:coc_global_extensions = ['coc-python', 'coc-snippets', 'coc-lists', 'coc-json']
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -257,9 +279,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -398,7 +420,7 @@ let g:pandoc#folding#fdc = 0
 let g:rustfmt_autosave = 1
 " }}}
 " Python     {{{
-au BufWritePre *.py silent! execute "Black"
+"au BufWritePre *.py silent! execute "Black"
 let g:black_linelength = 79
 let g:black_skip_string_normalization = 1
 " }}}
@@ -447,7 +469,7 @@ hi  Statement   cterm=NONE ctermfg=5 ctermbg=NONE
 "hi Conditional cterm=NONE ctermfg=5 ctermbg=NONE
 "hi Repeat      cterm=NONE ctermfg=5 ctermbg=NONE
 "hi Label       cterm=NONE ctermfg=5 ctermbg=NONE
-hi  Operator    cterm=NONE ctermfg=7 ctermbg=NONE
+hi  Operator    cterm=NONE ctermfg=5 ctermbg=NONE
 "hi Keyword     cterm=NONE ctermfg=5 ctermbg=NONE
 "hi Exception   cterm=NONE ctermfg=5 ctermbg=NONE
 
@@ -465,12 +487,12 @@ hi  Type         cterm=NONE ctermfg=3 ctermbg=NONE
 "hi Typedef      cterm=NONE ctermfg=3 ctermbg=NONE
 
 " Special Patterns
-hi  Special        cterm=NONE ctermfg=6 ctermbg=NONE
-"hi SpecialChar    cterm=NONE ctermfg=6 ctermbg=NONE
-"hi Tag            cterm=NONE ctermfg=6 ctermbg=NONE
-hi  Delimiter      cterm=NONE ctermfg=1 ctermbg=NONE
+hi  Special        cterm=NONE ctermfg=white ctermbg=NONE
+"hi SpecialChar    cterm=NONE ctermfg=white ctermbg=NONE
+"hi Tag            cterm=NONE ctermfg=white ctermbg=NONE
+hi  Delimiter      cterm=NONE ctermfg=3 ctermbg=NONE
 hi  SpecialComment cterm=NONE ctermfg=8 ctermbg=NONE
-"hi Debug          cterm=NONE ctermfg=6 ctermbg=NONE
+"hi Debug          cterm=NONE ctermfg=white ctermbg=NONE
 
 " Todo Fixme and Note
 hi Todo  cterm=NONE ctermfg=11 ctermbg=black
@@ -546,8 +568,8 @@ function Compiler(shouldClean)
 endfunction
 
 " Add key bindings
-nnoremap <leader>c :call Compiler(0)<CR>
-nnoremap <leader><S-C> :call Compiler(1)<CR>
+"nnoremap <leader>c :call Compiler(0)<CR>
+"nnoremap <leader><S-C> :call Compiler(1)<CR>
 " }}}
 " Autocommands ---------------------------------------------------------- {{{
 
@@ -631,7 +653,13 @@ autocmd FileType rmd setlocal spell
 autocmd FileType rmd setlocal spelllang=en_us
 autocmd FileType markdown setlocal spell
 autocmd FileType markdown setlocal spelllang=en_us
-autocmd FileType rmd,tex,markdown nnoremap <leader>p :w!<CR>:!preview %<CR>
+autocmd FileType rmd,markdown nnoremap <leader>p :w!<CR>:!preview %<CR>
+
+autocmd FileType tex setlocal spell
+autocmd FileType tex setlocal spelllang=en_us
+autocmd FileType tex nnoremap <leader>p :VimtexView<CR>
+autocmd FileType tex nnoremap <leader>c :w!<CR>:VimtexCompileSS<CR>
+autocmd FileType tex nnoremap <leader><S-C> :VimtexCompile<CR>
 
 " makefiles
 autocmd FileType make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
@@ -723,9 +751,9 @@ vnoremap <C-W><C-Q> <NOP>
 " Improvements to Existing Mappings ------------------------------------- {{{
 
 " more intelligent quitting
-command Wclose w | close
-cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
-cabbrev wq <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Wclose' : 'wq')<CR>
+"command Wclose w | close
+"cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
+"cabbrev wq <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Wclose' : 'wq')<CR>
 
 " center line on tag jumps
 nnoremap <C-]> <C-]>zz

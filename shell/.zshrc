@@ -142,6 +142,14 @@ then
     alias scheme='rlwrap -r -c -f $HOME/.cache/mit_scheme_bindings.txt scheme'
 fi
 
+# Vbox aliases
+alias vbox='VBoxManage'
+
+# Run processes detached
+alias firefox='run_detached firefox'
+alias zathura='run_detached zathura'
+alias draw.io='run_detached draw.io'
+
 # =========================================================================== #
 # Functions                                                                   #
 # =========================================================================== #
@@ -153,6 +161,11 @@ fi
 #  echo $PWD > ~/.last_dir
 #}
 #alias cd='cd_'
+
+# Run a command detached from the terminal session
+function run_detached {
+    nohup $argv </dev/null &>/dev/null & disown
+}
 
 # Navigate to top level of git repo
 function d {
@@ -332,3 +345,9 @@ function greeting {
 }
 
 greeting
+
+PATH="/home/housedhorse/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/housedhorse/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/housedhorse/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/housedhorse/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/housedhorse/perl5"; export PERL_MM_OPT;
