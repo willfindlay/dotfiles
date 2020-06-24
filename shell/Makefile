@@ -1,5 +1,5 @@
 .PHONY: install
-install: zsh tmux #git
+install: zsh tmux git
 
 .PHONY: git
 git:
