@@ -19,10 +19,12 @@ TERM=alacritty
 
 CARLETON_ID=williamfindlay
 
-PATH DEFAULT=${PATH}:/home/@{PAM_USER}/.local/bin
-PATH DEFAULT=${PATH}:/home/@{PAM_USER}/.cargo/bin
-PATH DEFAULT=${PATH}:/home/@{PAM_USER}/.npm-global/bin
-PATH DEFAULT=${PATH}:/home/@{PAM_USER}/.gem/ruby/2.7.0/bin
+PATH DEFAULT=${PATH}:/bin
+PATH DEFAULT=${PATH}:/usr/bin
+PATH DEFAULT=${PATH}:${HOME}/.local/bin
+PATH DEFAULT=${PATH}:${HOME}/.cargo/bin
+PATH DEFAULT=${PATH}:${HOME}/.npm-global/bin
+PATH DEFAULT=${PATH}:${HOME}/.gem/ruby/2.7.0/bin
 
 # Globals
 TZ=America/New_York
