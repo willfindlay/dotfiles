@@ -227,7 +227,14 @@ let g:pydocstring_formatter = 'numpy'
 let g:clang_format#auto_format = 0
 let g:clang_format#style_options = {
             \ 'AllowShortIfStatementsOnASingleLine': 'false',
-            \ 'AllowShortFunctionsOnASingleLine': 'false' }
+            \ 'AllowShortFunctionsOnASingleLine': 'false',
+            \ 'AlignTrailingComments': 'true',
+            \ 'AlignConsecutiveAssignments': 'true',
+            \ 'AllowAllArgumentsOnNextLine': 'true',
+            \ 'AllowAllParametersOfDeclarationOnNextLine': 'true',
+            \ 'DerivePointerAlignment': 'false',
+            \ 'PointerAlignment': 'Right',
+            \ 'BreakBeforeBraces': 'Linux' }
 " }}}
 " Commentary {{{
 autocmd FileType pandoc setlocal commentstring=<!--\ %s\ -->
