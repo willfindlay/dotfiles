@@ -621,29 +621,7 @@ function FIfEmpty(func)
     endif
 endfunction
 
-function InitRmd()
-    execute "r $HOME/.vimskeletons/rmd"
-    execute "1d"
-    execute "w"
-endfunction
-
-function DoRmdSetup()
-    call FIfEmpty(function('InitRmd'))
-endfunction
-
-function InitMd()
-    execute "r $HOME/.vimskeletons/md"
-    execute "1d"
-    execute "w"
-    call FoldPandocTemplate()
-endfunction
-
-function DoMdSetup()
-    call FIfEmpty(function('InitMd'))
-endfunction
-
 function InitTex()
-    "execute "!findlaytex"
     execute "r $HOME/.vimskeletons/tex"
     execute "1d"
     execute "w"
@@ -655,9 +633,7 @@ function DoTexSetup()
 endfunction
 
 " typsetting languages
-autocmd BufEnter *.rmd :call DoRmdSetup()
-autocmd BufEnter *.md :call DoMdSetup()
-autocmd BufEnter *.tex :call DoTexSetup()
+autocmd BufEnter main.tex :call DoTexSetup()
 autocmd FileType rmd setlocal spell
 autocmd FileType rmd setlocal spelllang=en_us
 autocmd FileType markdown setlocal spell
