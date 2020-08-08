@@ -8,9 +8,9 @@ font pango:Inconsolata-dz for Powerline 7.5
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $TERM
+bindsym $mod+Return exec alacritty
 # start a terminal in most recently opened directory
-bindsym $mod+Shift+Return exec $TERM -d $(cat ~/.last_dir)
+bindsym $mod+Shift+Return exec alacritty -d $(cat ~/.last_dir)
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -260,10 +260,6 @@ exec_always $HOME/.local/bin/setbg
 
 # Compton for opacity
 exec --no-startup-id picom -b --backend glx --vsync
-
-# i3-gaps stuff
-gaps inner 0
-gaps outer 0
 
 # Startup
 exec redshift -l 45.3277070:-75.7878600
