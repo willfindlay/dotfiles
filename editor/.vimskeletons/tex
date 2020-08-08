@@ -1,86 +1,64 @@
-% Preamble ================================================================ {{{
+% =========================================================================== %
+% Preamble                                                                    %
+% =========================================================================== %
 
-\documentclass[
-    12pt,
-]
-{findlayart}
+\documentclass[dvipsnames]{article}
+\usepackage[utf8]{inputenc}
 
-% Title and subtitle
 \title{Untitled}
-\subtitle{Untitled}
 
-% Author name(s)
 \author{William Findlay}
-%\author[$\dagger$]{William Findlay}
-%\affil[$\dagger$]{School of Computer Science, Carleton University}
+%\affiliation{Carleton University}
+%\email{williamfindlay@cmail.carleton.ca}
 
-% ========================================================================= }}}
+% =========================================================================== %
+% Document                                                                    %
+% =========================================================================== %
 
 \begin{document}
 
-% Title, ToC, LoF/LoT/LoL ================================================= {{{
+% ----------------------------- %
+% Uncomment for title page      %
+% ----------------------------- %
+%\maketitle
+%\thispagestyle{empty}
+%\pagenumbering{roman}
+%\newpage
 
-% Title page
-\maketitle
-\thispagestyle{empty}
-\pagenumbering{roman}
+% ----------------------------- %
+% Uncomment ToC, LoT, LoF, LoL: %
+% ----------------------------- %
+%\begingroup
+%\hypersetup{linkcolor=black}
+%\tableofcontents
+%\newpage
+%\listoffigures
+%\newpage
+%\listoftables
+%\newpage
+%\lstlistoflistings
+%\newpage
+%\endgroup
 
-% Table of contents
-\newpage
-\begingroup
-\hypersetup{linkcolor=black}
-\tableofcontents
-
-% List of figs, tables, listings
-\newpage
-\listoffigures
-\newpage
-\listoftables
-\newpage
-\lstlistoflistings
-\endgroup
-
-% ========================================================================= }}}
-
-% Main Document =========================================================== {{{
-
-% Comment this for normal spacing
-\onehalfspacing
-
-% Setup the rest of the document
-\newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
+% ----------------------------- %
+% Uncomment for onehalfspacing  %
+% ----------------------------- %
+%\onehalfspacing
 
 
 
+% TODO: include main document sections here
 
 
 
-
-
-% ========================================================================= }}}
-
-% Bibliography ============================================================ {{{
-
-\clearpage
-
-\printbibliography
-
-% ========================================================================= }}}
-
-% Appendix ================================================================ {{{
-
-
-
-
-
-
-
-
-
-% ========================================================================= }}}
+% ----------------------------- %
+% Uncomment for bibliography    %
+% ----------------------------- %
+%\clearpage
+%\printbibliography
 
 \end{document}
 
