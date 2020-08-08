@@ -131,6 +131,8 @@ Plug 'honza/vim-snippets'
 " Multiple cursors
 Plug 'terryma/vim-multiple-cursors'
 
+Plug 'octol/vim-cpp-enhanced-highlight'
+
 call plug#end()
 
 " }}}
@@ -215,7 +217,7 @@ let g:vimtex_quickfix_latexlog = {
       \   'default' : 0,
       \ },
       \}
-let g:vimtex_text_obj_enabled = 0
+let g:vimtex_text_obj_enabled = 1
 " }}}
 " PythonDocstring {{{
 let g:pydocstring_enable_mapping = 0
