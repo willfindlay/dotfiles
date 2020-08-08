@@ -168,7 +168,12 @@ function run_detached {
 }
 
 # Navigate to top level of git repo
-function d {
+function gr {
+    if ! git status &>/dev/null
+    then
+        echo 1>&2 "$(pwd) is not in a git repository."
+        return
+    fi
     while test $PWD != "/"
     do
         if test -d .git
