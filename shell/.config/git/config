@@ -28,6 +28,7 @@
     algorithm = patience
     compactionHeuristic = true
 [commit]
+    verbose = true
     gpgsign = true
 [protocol]
     version = 2

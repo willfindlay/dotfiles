@@ -149,6 +149,8 @@ alias vbox='VBoxManage'
 alias firefox='run_detached firefox'
 alias zathura='run_detached zathura'
 alias draw.io='run_detached draw.io'
+alias drawio='run_detached draw.io'
+alias libreoffice='run_detached libreoffice'
 
 # =========================================================================== #
 # Functions                                                                   #

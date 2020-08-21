@@ -231,7 +231,8 @@ let g:clang_format#style_options = {
             \ 'AllowShortIfStatementsOnASingleLine': 'false',
             \ 'AllowShortFunctionsOnASingleLine': 'false',
             \ 'AlignTrailingComments': 'true',
-            \ 'AlignConsecutiveAssignments': 'true',
+            \ 'AlignConsecutiveAssignments': 'false',
+            \ 'AlignConsecutiveMacros': 'true',
             \ 'AllowAllArgumentsOnNextLine': 'true',
             \ 'AllowAllParametersOfDeclarationOnNextLine': 'true',
             \ 'DerivePointerAlignment': 'false',
@@ -303,7 +304,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <c-k> :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -366,6 +367,7 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_current_file = 1
 let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 " }}}
 " Airline {{{
 let g:airline_theme='base16_gruvbox_dark_hard'
@@ -955,5 +957,11 @@ function! HighlightAnnotations()
     call matchadd('Note','\<NOTE\>')
 endfunction
 autocmd BufEnter * call HighlightAnnotations()
+
+function Inc(...)
+  let result = g:i
+  let g:i += a:0 > 0 ? a:1 : 1
+  return result
+endfunction
 
 " }}}
