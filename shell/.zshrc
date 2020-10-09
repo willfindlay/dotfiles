@@ -196,6 +196,10 @@ function lcd {
     cd $(readlink -f $argv)
 }
 
+function vmlinux {
+    bpftool btf dump file /sys/kernel/btf/vmlinux format c
+}
+
 
 # =========================================================================== #
 # Environment Variables                                                       #
@@ -204,7 +208,6 @@ function lcd {
 
 # Set editor and browser
 export EDITOR=nvim
-export BROWSER=firefox
 
 # Append to PATH
 export PATH="$PATH:$HOME/.local/bin"
@@ -221,6 +224,35 @@ export GOPATH=$HOME/.local/go
 export PIPENV_VENV_IN_PROJECT=1
 
 export FZF_DEFAULT_COMMAND='find .'
+
+export NAME="William Findlay"
+export EMAIL="william@williamfindlay.com"
+
+export TERM=alacritty
+
+export CARLETON_ID=williamfindlay
+
+# Globals
+export TZ="America/New_York"
+
+# Configs
+export R_LIBS_USER="$HOME/.Rpackages"
+export SXHKD_SHELL=/usr/bin/bash
+
+# Rust stuff
+export CARGO_INCREMENTAL=1
+export RUSTFLAGS="-C target-cpu=native"
+export RUST_BACKTRACE=1
+
+# Handy for debugging
+export WINEDEBUG=fixme-all
+
+# make less better
+# X = leave content on-screen
+# F = quit automatically if less than one screenfull
+# R = raw terminal characters (fixes git diff)
+#     see http://jugglingbits.wordpress.com/2010/03/24/a-better-less-playing-nice-with-git/
+export LESS="-F -X -R"
 
 
 # =========================================================================== #
@@ -346,6 +378,7 @@ export PS1="%F{8}[%T]%f %(!.%F{1}.%F{4})%n%f%F{8}@%f%(!.%F{1}.%F{4})%m%f%F{8}:%f
 # =========================================================================== #
 # Greeting                                                                    #
 # =========================================================================== #
+
 
 function greeting {
     # TODO

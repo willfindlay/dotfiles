@@ -1,2 +1,0 @@
-source /home/housedhorse/.screenlayout/layout.sh
-xsetwacom set "Wacom Intuos S Pen stylus" MapToOutput "HEAD-0"

@@ -30,7 +30,11 @@ silent !mkdir -p /tmp/tags
 set inccommand=nosplit
 "set relativenumber
 set colorcolumn=80
+
+" Spelling
 set spellfile=~/.config/nvim/en.utf-8.add
+set spelllang=en_ca
+autocmd FileType rmd,tex,markdown setlocal spell
 
 " Formatting options specific to rmd, md, and tex files
 au FileType rmd setlocal indentexpr=""
@@ -201,6 +205,8 @@ set number
 set breakindent
 set wrap lbr
 
+let g:tex_conceal="admgsb"
+
 " }}}
 " Plugin Options -------------------------------------------------------- {{{
 
@@ -209,12 +215,14 @@ set signcolumn=yes
 " Vimtex {{{
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_quickfix_enabled = 1
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_quickfix_open_on_warning = 0
 " Disable overfull/underfull \hbox and all package warnings
 let g:vimtex_quickfix_latexlog = {
       \ 'overfull' : 0,
       \ 'underfull' : 0,
       \ 'packages' : {
-      \   'default' : 0,
+      \ 'default' : 0,
       \ },
       \}
 let g:vimtex_text_obj_enabled = 1
@@ -636,17 +644,9 @@ endfunction
 
 " typsetting languages
 autocmd BufEnter main.tex :call DoTexSetup()
-autocmd FileType rmd setlocal spell
-autocmd FileType rmd setlocal spelllang=en_us
-autocmd FileType markdown setlocal spell
-autocmd FileType markdown setlocal spelllang=en_us
-autocmd FileType rmd,markdown nnoremap <leader>p :w!<CR>:!preview %<CR>
-
-autocmd FileType tex setlocal spell
-autocmd FileType tex setlocal spelllang=en_us
 autocmd FileType tex nnoremap <leader>p :VimtexView<CR>
 autocmd FileType tex nnoremap <leader>c :w!<CR>:VimtexCompileSS<CR>
-autocmd FileType tex nnoremap <leader><S-C> :VimtexCompile<CR>
+"autocmd FileType tex nnoremap <leader><S-C> :VimtexCompile<CR>
 
 " makefiles
 autocmd FileType make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
@@ -963,5 +963,13 @@ function Inc(...)
   let g:i += a:0 > 0 ? a:1 : 1
   return result
 endfunction
+
+nmap <leader>sp :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 " }}}

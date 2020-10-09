@@ -5,59 +5,24 @@
 \documentclass[dvipsnames]{article}
 \usepackage[utf8]{inputenc}
 
+% Set paper geometry
+\usepackage[letterpaper, margin=1.87cm]{geometry}
+
+% Must include this before setting title and author
+\usepackage{findlay}
+
 \title{Untitled}
 
 \author{William Findlay}
+% For acmart.cls:
 %\affiliation{Carleton University}
 %\email{williamfindlay@cmail.carleton.ca}
 
-\usepackage[dvipsnames]{xcolor}
-\definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
-\definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
-\definecolor[named]{ACMOrange}{cmyk}{0,0.42,1,0.01}
-\definecolor[named]{ACMRed}{cmyk}{0,0.90,0.86,0}
-\definecolor[named]{ACMLightBlue}{cmyk}{0.49,0.01,0,0}
-\definecolor[named]{ACMGreen}{cmyk}{0.20,0,1,0.19}
-\definecolor[named]{ACMPurple}{cmyk}{0.55,1,0,0.15}
-\definecolor[named]{ACMDarkBlue}{cmyk}{1,0.58,0,0.21}
+% Add bibliography:
+%\addbibresource{main.bib}
 
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=ACMPurple,
-    urlcolor=ACMBlue,
-}
-
-\usepackage{cleveref}
-\usepackage{csquotes}
-
-\usepackage{epigraph}
-\setlength\epigraphwidth{.6\textwidth}
-\renewcommand{\epigraphsize}{\small\itshape}
-
-% ----------------------------- %
-% Uncomment for Fancy Headers   %
-% ----------------------------- %
-%\usepackage{fancyhdr}
-%\pagestyle{fancy}
-%\renewcommand{\headrulewidth}{0.25pt}
-%\renewcommand{\footrulewidth}{0pt}
-%\fancyhead{}   % clear all headers
-%\fancyfoot{}   % clear all footers
-%\fancyfoot[CE,CO]{\small\thepage}
-%% left mark holds the chapter title
-%\renewcommand{\chaptermark}[1]{\markboth{#1}{\textsection\thechapter~#1}}
-%\renewcommand{\sectionmark}[1]{\markright{\textsection\thesection~#1}}
-%\fancyhead[LO]{\small\nouppercase{\itshape\thetitle}} % book title
-%\fancyhead[LE]{\small\nouppercase{\itshape\leftmark}} % chapter title
-%\fancyhead[RE,RO]{\small\nouppercase{\itshape\rightmark}} % section title
-
-% ----------------------------- %
-% Comment to use non-SF fonts   %
-% ----------------------------- %
-\renewcommand{\familydefault}{\sfdefault}
-
-\setcounter{tocdepth}{3}
+% To set sans serif font:
+%\renewcommand{\familydefault}{\sfdefault}
 
 % =========================================================================== %
 % Document                                                                    %
@@ -65,46 +30,37 @@
 
 \begin{document}
 
-% ----------------------------- %
-% Uncomment for title page      %
-% ----------------------------- %
-%\maketitle
-%\thispagestyle{empty}
-%\pagenumbering{roman}
-%\newpage
+% Title page
+\maketitle
+\thispagestyle{empty}
+\pagenumbering{roman}
+\newpage
 
-% ----------------------------- %
-% Uncomment ToC, LoT, LoF, LoL: %
-% ----------------------------- %
-%\begingroup
-%\hypersetup{linkcolor=black}
-%\tableofcontents
-%\newpage
-%\listoffigures
-%\newpage
-%\listoftables
-%\newpage
-%\lstlistoflistings
-%\newpage
-%\endgroup
+% Table of Contents, List of Figures, List of Tables, List of Listings
+\begingroup
+\hypersetup{linkcolor=black}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\lstlistoflistings
+\newpage
+\endgroup
 
+% Reset page numbering
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-% ----------------------------- %
-% Uncomment for onehalfspacing  %
-% ----------------------------- %
+% Uncomment for 1.5 spacing:
 %\onehalfspacing
-
 
 
 % TODO: include main document sections here
 
 
-
-% ----------------------------- %
-% Uncomment for bibliography    %
-% ----------------------------- %
+% Uncomment for bibliography:
 %\clearpage
 %\printbibliography
 

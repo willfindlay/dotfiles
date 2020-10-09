@@ -7,6 +7,4 @@ general:
 
 .PHONY: xprofile
 xprofile:
-	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .screenlayout/ $(HOME)/.screenlayout/
-	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .xprofile $(HOME)/.xprofile
 	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .xbindkeysrc $(HOME)/.xbindkeysrc
