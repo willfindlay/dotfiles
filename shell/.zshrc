@@ -209,13 +209,8 @@ function vmlinux {
 # Set editor and browser
 export EDITOR=nvim
 
-# Append to PATH
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
-export PATH="$PATH:/usr/share/bcc/tools"
-
 # Set display env
-export DISPLAY=:0.0
+#export DISPLAY=:0.0
 
 # Set gopath
 export GOPATH=$HOME/.local/go
@@ -386,7 +381,6 @@ function greeting {
 
 greeting
 
-PATH="/home/housedhorse/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/housedhorse/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/housedhorse/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/housedhorse/perl5\""; export PERL_MB_OPT;
