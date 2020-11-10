@@ -1,0 +1,49 @@
+% =========================================================================== %
+% Preamble                                                                    %
+% =========================================================================== %
+
+\documentclass[12pt, dvipsnames]{beamer}
+%\documentclass[12pt, dipsnames, notes=only]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{beamerthemesimple}
+
+\title{Untitled}
+\author{\textbf{William Findlay}\inst{1}}
+\institute{\inst{1}Carleton University}
+
+\usepackage{csquotes}
+\usepackage{booktabs}
+
+% Center floats by default
+\makeatletter
+\g@addto@macro\@floatboxreset{\centering}
+\makeatother
+
+% Table of Contents for sections
+\AtBeginSection[]
+{
+    \begin{frame}
+        \frametitle{Outline of Talk}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\setwatermark[hoffset=1cm, voffset=1cm]{WATERMARK HERE!}
+
+% =========================================================================== %
+% Document                                                                    %
+% =========================================================================== %
+
+\begin{document}
+
+% Title page
+\maketitle
+
+\begin{frame}[t]{Title}{Subtitle}
+Content goes here...
+\end{frame}
+
+\end{document}
+
+% vim:syn=tex

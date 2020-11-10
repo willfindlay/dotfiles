@@ -86,6 +86,8 @@ alias pip='pip3'
 # Makefiles
 alias m='make'
 
+alias bc='bc -l'
+
 # Map vim to nvim if it exists
 if command -v nvim > /dev/null
 then
@@ -198,6 +200,10 @@ function lcd {
 
 function vmlinux {
     bpftool btf dump file /sys/kernel/btf/vmlinux format c
+}
+
+function crop-image {
+    convert $1 -trim +repage $1
 }
 
 

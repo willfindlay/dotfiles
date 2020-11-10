@@ -81,6 +81,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-ruby/vim-ruby'
+Plug 'fatih/vim-go'
 
 " Tabularize all the things
 Plug 'godlygeek/tabular'
@@ -422,27 +423,34 @@ let NERDTreeMinimalUI        = 1
 let NERDTreeDirArrows        = 1
 
 " }}}
+
 " Pandoc/Rmd {{{
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#folding#level = 7
 let g:pandoc#folding#fdc = 0
 " }}}
+
 " Grammarous {{{
 " }}}
+
 " Vim-Go     {{{
 " let g:go_mod_fmt_autosave = 0
 " let g:go_doc_keywordprg_enabled = 0
 " let g:go_template_autocreate = 0
 " let g:go_imports_autosave = 0
+let g:go_fmt_command = "goimports"
 " }}}
+
 " Rust       {{{
 let g:rustfmt_autosave = 1
 " }}}
+
 " Python     {{{
-"au BufWritePre *.py silent! execute "Black"
-let g:black_linelength = 79
+au BufWritePre *.py silent! execute "Black"
+" let g:black_linelength = 79
 let g:black_skip_string_normalization = 1
 " }}}
+
 " HighlightedYank {{{
 let g:highlightedyank_highlight_duration = 500
 " }}}
@@ -468,8 +476,8 @@ hi SpellRare  cterm=underline ctermbg=NONE
 hi Underlined cterm=underline ctermfg=4 ctermbg=NONE
 
 " Comments
-hi Comment         cterm=NONE ctermfg=8 ctermbg=NONE
-hi PythonDocstring cterm=NONE ctermfg=8 ctermbg=NONE
+hi Comment         cterm=none ctermfg=8 ctermbg=NONE
+hi PythonDocstring cterm=none ctermfg=8 ctermbg=NONE
 
 " Constants
 hi  Constant  cterm=NONE ctermfg=16 ctermbg=NONE
