@@ -97,6 +97,9 @@ Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'psf/black', { 'tag': '19.10b0' }
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 
+" Julia language support
+Plug 'JuliaEditorSupport/julia-vim'
+
 " Show colors
 Plug 'ap/vim-css-color'
 
@@ -660,7 +663,7 @@ autocmd FileType tex nnoremap <leader>c :w!<CR>:VimtexCompileSS<CR>
 autocmd FileType make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 
 " html, yaml, json, bib indentation
-autocmd FileType html,yaml,json,bib,css setlocal tabstop=2 shiftwidth=2 indentexpr=""
+autocmd FileType tex,html,yaml,json,bib,css setlocal tabstop=2 shiftwidth=2 indentexpr=""
 
 " fix C preprocessor indentation
 set cinkeys=0{,0},0),:,!^F,o,O,e

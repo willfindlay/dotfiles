@@ -2,15 +2,16 @@
 % Preamble                                                                    %
 % =========================================================================== %
 
-\documentclass[12pt, dvipsnames]{beamer}
+\documentclass[12pt, dvipsnames, aspectratio=169]{beamer}
 %\documentclass[12pt, dipsnames, notes=only]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage{beamerthemesimple}
 
+\date{\today}
 \title{Untitled}
-\author{\textbf{William Findlay}\inst{1}}
-\institute{\inst{1}Carleton University}
+\author{William Findlay}
+\institute{Carleton University\\\href{mailto:will@ccsl.carleton.ca}{\ttfamily will@ccsl.carleton.ca}}
 
 \usepackage{csquotes}
 \usepackage{booktabs}
@@ -20,16 +21,72 @@
 \g@addto@macro\@floatboxreset{\centering}
 \makeatother
 
+\usepackage{listings}
+
+\lstnewenvironment{listing}[1][]{\lstset{#1}}{}
+
+\definecolor[named]{blue}{HTML}{0071b2}
+\definecolor[named]{orange}{HTML}{e59c00}
+\definecolor[named]{green}{HTML}{009e73}
+\definecolor[named]{purple}{HTML}{88498f}
+\definecolor[named]{dark-grey}{HTML}{515151}
+\definecolor[named]{grey}{HTML}{797979}
+
+\colorlet{listing-basic}{grey}
+\colorlet{listing-keyword}{blue}
+\colorlet{listing-keyword-2}{orange}
+\colorlet{listing-keyword-3}{purple}
+\colorlet{listing-comment}{purple}
+\colorlet{listing-string}{green}
+
+% Set default listings style
+\lstdefinestyle{listingstyle}{
+    basicstyle       = {\ttfamily\normalsize\color{listing-basic}\lst@ifdisplaystyle\scriptsize\fi},
+    keywordstyle     = {\color{listing-keyword}\bfseries},
+    keywordstyle     = {[2]\color{listing-keyword-2}\bfseries},
+    keywordstyle     = {[3]\color{listing-keyword-3}\bfseries\itshape},
+    sensitive        = true,
+    commentstyle     = {\itshape\color{listing-comment}},
+    stringstyle      = {\color{listing-string}},
+    showstringspaces = false,
+    literate = {~}{$\sim$}{1}
+}
+\lstset{style=listingstyle}
+
+\setbeamertemplate{section in toc}[sections numbered]
+
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = .,
+    urlcolor   = blue,
+    citecolor  = blue,
+}
+\urlstyle{tt}
+
+\newcommand{\fullframegraphic}[1]{%
+    {%
+        \usebackgroundtemplate{\includegraphics[width=\paperwidth]{#1}}
+        \begin{frame}[plain]
+        \end{frame}
+    }
+}
+
+\newcommand\ufootnote[1]{%
+    \begingroup
+        \renewcommand\thefootnote{}\footnote{\hspace{-1.8em}#1}%
+        \addtocounter{footnote}{-1}%
+    \endgroup
+}
+
 % Table of Contents for sections
 \AtBeginSection[]
 {
-    \begin{frame}
-        \frametitle{Outline of Talk}
-        \tableofcontents[currentsection]
+    \begin{frame}[c, noframenumbering, plain]
+        \begin{center}
+        \fontsize{42.99}{51.59} \selectfont \bfseries \color{destacado} \insertsection
+        \end{center}
     \end{frame}
 }
-
-\setwatermark[hoffset=1cm, voffset=1cm]{WATERMARK HERE!}
 
 % =========================================================================== %
 % Document                                                                    %
@@ -37,11 +94,27 @@
 
 \begin{document}
 
-% Title page
-\maketitle
+% Optional watermark
+\setwatermark[hoffset=6cm, voffset=0.3cm]{}
 
-\begin{frame}[t]{Title}{Subtitle}
-Content goes here...
+% Title page
+\begin{frame}[noframenumbering, plain]
+\titlepage
+\vfill
+\vspace{4em}
+{\footnotesize Venue of Talk}
+\end{frame}
+
+\begin{frame}[c, noframenumbering, plain]{Outline of this Talk}
+    \tableofcontents
+\end{frame}
+
+\section{Untitled Section}
+
+\begin{frame}[c]{Example Slide}
+\begin{itemize}
+    \item Foo
+\end{itemize}
 \end{frame}
 
 \end{document}
