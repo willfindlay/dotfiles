@@ -222,13 +222,13 @@ let g:vimtex_quickfix_enabled = 1
 let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_open_on_warning = 0
 " Disable overfull/underfull \hbox and all package warnings
-let g:vimtex_quickfix_latexlog = {
-      \ 'overfull' : 0,
-      \ 'underfull' : 0,
-      \ 'packages' : {
-      \ 'default' : 0,
-      \ },
-      \}
+"let g:vimtex_quickfix_latexlog = {
+"      \ 'overfull' : 0,
+"      \ 'underfull' : 0,
+"      \ 'packages' : {
+"      \ 'default' : 0,
+"      \ },
+"      \}
 let g:vimtex_text_obj_enabled = 1
 " }}}
 " PythonDocstring {{{
