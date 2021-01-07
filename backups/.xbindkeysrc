@@ -1,0 +1,25 @@
+# Pulse Audio controls
+"volume i 2" #increase sound volume
+    XF86AudioRaiseVolume
+"volume d 2" #decrease sound volume
+    XF86AudioLowerVolume
+"volume m" # mute sound
+    XF86AudioMute
+
+# Sreen brightness controls
+"light -A 5" # increase screen brightness
+    XF86MonBrightnessUp
+"light -U 5" # decrease screen brightness
+    XF86MonBrightnessDown
+
+# Touchpad controls
+"/some/path/toggletouchpad.sh" # toggle touchpad
+    XF86TouchpadToggle
+
+# Media player controls
+"playerctl play-pause"
+    XF86AudioPlay
+"playerctl next"
+    XF86AudioNext
+"playerctl previous"
+    XF86AudioPrev

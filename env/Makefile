@@ -1,5 +1,5 @@
 .PHONY: install
-install: pamenv
+install: pamenv config
 
 .PHONY: pamenv
 pamenv:

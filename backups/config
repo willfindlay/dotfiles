@@ -1,0 +1,36 @@
+[user]
+    name = William Findlay
+    email = william@williamfindlay.com
+    signingkey = 8F875C461867520BB67A66637162B44E9E560373
+[pull]
+    rebase = false
+[mergetool "nvim"]
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[merge]
+    tool = nvim
+[mergetool]
+    prompt = false
+    keepBackup = false
+[core]
+    editor = nvim
+    autocrlf = input
+    safecrlf = true
+[filter "lfs"]
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+[help]
+    autocorrect = 1
+[github]
+    user = willfindlay
+[diff]
+    algorithm = patience
+    compactionHeuristic = true
+[commit]
+    verbose = true
+    gpgsign = true
+[protocol]
+    version = 2
+[diff "odf"]
+    textconv = odt2txt

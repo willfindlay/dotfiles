@@ -1,5 +1,5 @@
-# Ignore everything
-*
-
-# But not .gitignore
-!.gitignore
+sessions
+spell
+swap
+words
+plugged
