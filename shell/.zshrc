@@ -159,13 +159,6 @@ alias libreoffice='run_detached libreoffice'
 # =========================================================================== #
 
 
-# Save changed directory as last changed directory
-#function cd_ {
-#  cd "$@"
-#  echo $PWD > ~/.last_dir
-#}
-#alias cd='cd_'
-
 # Run a command detached from the terminal session
 function run_detached {
     nohup $argv </dev/null &>/dev/null & disown
@@ -188,9 +181,9 @@ function gr {
     done
 }
 
-# Limit process execution to three cores
+# Limit process execution to two cores
 function limit {
-    numactl -C 0,1,2 $argv
+    numactl -C 0,1 $argv
 }
 
 # Like cd but resolves links first
@@ -204,6 +197,11 @@ function vmlinux {
 
 function crop-image {
     convert $1 -trim +repage $1
+}
+
+# Convert a LaTeX file into plaintext and copy it to the system clipboard
+function grammarly {
+    detex -l "$1" | sed 's/ *\([ \.,;\:]\)/\1/g' | xclip -selection clipboard
 }
 
 
@@ -234,7 +232,7 @@ export TERM=alacritty
 export CARLETON_ID=williamfindlay
 
 # Globals
-export TZ="America/New_York"
+export TZ="Canada/Eastern"
 
 # Configs
 export R_LIBS_USER="$HOME/.Rpackages"
@@ -262,7 +260,8 @@ export LESS="-F -X -R"
 
 
 # zsh syntax highlighting
-. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+SYNFILE=/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f $SYNFILE ] && . $SYNFILE
 
 alias vimdiff='nvim -d'
 alias vdiff='nvim -d'
@@ -311,69 +310,15 @@ export LESS_TERMCAP_ZW=$(tput rsupm)
 
 
 # =========================================================================== #
-# Hook Functions                                                              #
-# =========================================================================== #
-
-
-# This function sets up the git prompt if we are in a repository,
-# otherwise it just unsets it.
-# We invoke it before every command so that it updates promptly.
-function setup_git_prompt {
-    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        unset git_prompt
-        return 0
-    fi
-
-    local git_status git_branch
-
-    git_branch="$(git symbolic-ref HEAD 2>/dev/null)"
-    git_branch="${git_branch#refs/heads/}"
-
-    if [ "${#git_branch}" -ge 24 ]; then
-        git_branch="${git_branch:0:21}..."
-    fi
-
-    git_status=$(git status | (
-    unset dirty deleted untracked newfile ahead behind renamed
-    while read line ; do
-        case "$line" in
-          *modified:*)                      dirty='%F{blue}%B+%b%f' ; ;;
-          *deleted:*)                       deleted='%F{red}%Bx%b%f' ; ;;
-          *'Untracked files:')              untracked='%F{yellow}%B…%b%f' ; ;;
-          *'new file:'*)                    newfile='%F{green}%B*%b%f' ; ;;
-          *'Your branch is ahead of '*)     ahead='%F{green}%B⬆%b%f' ; ;;
-          *'Your branch is behind '*)       behind='%F{blue}%B⬇%b%f' ; ;;
-          *renamed:*)                       renamed='%F{magenta}%B>%b%f' ; ;;
-        esac
-    done
-    git_status="$ahead$behind$newfile$deleted$dirty$renamed$untracked"
-    [ -n "$git_status" ] && echo "$git_status" || echo '%F{green}✔%f'
-    ))
-
-    git_branch="${git_branch:-no branch}"
-
-    git_prompt=" %F{normal}(%f%F{green}%B${git_branch}%b%f ${git_status}%F{normal})%f"
-}
-
-
-# =========================================================================== #
 # Prompt                                                                      #
 # =========================================================================== #
 
 
-# If you want powerline, uncomment this and comment everything else
-# in this section.
-#powerline-daemon -q
-#. /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
-
-# Refresh git prompt before each command
-precmd() {
-    setup_git_prompt
-    export RPS1="$git_prompt"
-}
-
-# This long and complex format string produces a sexy prompt
-export PS1="%F{8}[%T]%f %(!.%F{1}.%F{4})%n%f%F{8}@%f%(!.%F{1}.%F{4})%m%f%F{8}:%f%F{3}%(!.%d.%~)%f %F{1}|%f "
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if command -v starship > /dev/null
+then
+    eval "$(starship init zsh)"
+fi
 
 
 # =========================================================================== #
