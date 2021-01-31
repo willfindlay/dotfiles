@@ -1,0 +1,34 @@
+format = "$time$username[@](fg:8)$hostname[:](fg:8)$directory$git_branch$git_commit$git_state$git_status$character"
+
+add_newline = false
+
+[username]
+disabled = false
+show_always = true
+format = "[$user]($style)"
+style_root = "red"
+style_user = "blue"
+
+[hostname]
+ssh_only = false
+disabled = false
+show_always = true
+format = "[$hostname]($style)"
+style = "blue"
+
+[directory]
+truncation_length = -1
+style = "yellow"
+format = "[$path]($style) "
+
+[line_break]
+disabled = true
+
+[character]
+success_symbol = "[|](red)"
+error_symbol = "[|](red)"
+
+[time]
+disabled = false
+format = '[\[$time\]](fg:8) '
+time_format = "%H:%M"
