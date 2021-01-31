@@ -3,7 +3,7 @@ msg:
 	@echo "Please see Makefile for targets"
 
 .PHONY: install
-install: | bin editor env gui shell etc
+install: bin editor env gui shell etc
 
 .PHONY: bin
 bin:
