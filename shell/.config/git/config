@@ -35,3 +35,5 @@
     version = 2
 [diff "odf"]
     textconv = odt2txt
+[init]
+	defaultBranch = main

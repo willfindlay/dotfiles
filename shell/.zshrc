@@ -204,6 +204,10 @@ function grammarly {
     detex -l "$1" | sed 's/ *\([ \.,;\:]\)/\1/g' | xclip -selection clipboard
 }
 
+function pdftotext {
+    command pdftotext "$1" - "${@:2}" | awk '/^$/ { print "\n"; } /./ { printf("%s ", $0); } END { print ""; }' | xclip -selection clipboard
+}
+
 
 # =========================================================================== #
 # Environment Variables                                                       #
@@ -278,7 +282,7 @@ alias dmesg='dmesg --color=always'
 alias less='less -R'
 
 # diff
-alias diff='diff --color'
+alias diff='diff -c --color'
 
 # gcc
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
