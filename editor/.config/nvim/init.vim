@@ -416,9 +416,14 @@ tmap <c-l> <C-\><C-n><c-l>
 nnoremap <leader>hl :syntax sync fromstart<CR>
 vnoremap <leader>hl :syntax sync fromstart<CR>
 
-" =========================================================================== "
-" File-Specific Key Bindings                                                  "
-" =========================================================================== "
+" coc.nvim ------------------------------------------------------------------
+
+command! -nargs=0 NextDiagnostic :call CocAction('diagnosticNext')
+command! -nargs=0 PrevDiagnostic :call CocAction('diagnosticPrevious')
+
+nnoremap <leader>e     :NextDiagnostic<CR>
+nnoremap <leader><s-e> :PrevDiagnostic<CR>
+nnoremap <leader>d     :CocList diagnostics<CR>
 
 " Rust ----------------------------------------------------------------------
 
@@ -435,11 +440,11 @@ au FileType rust nmap <leader><s-t> :RustTest!<CR>
 autocmd FileType tex,bib nmap <leader>p :VimtexView<CR>
 autocmd FileType tex,bib nmap <leader>c :w!<CR>:VimtexCompileSS<CR>
 
-function s:detex() range
-    echo system('echo -E '.shellescape(join(getline(a:firstline, a:lastline), ' ')).' | detex -l | sed ''s/ *\([ \.,;\:]\)/\1/g'' | xclip -selection clipboard')
-endfunction
-au FileType tex com -range=% -nargs=0 Detex :<line1>,<line2>call <SID>detex()
-au FileType tex vmap <leader>g :Detex<CR>
+"function s:detex() range
+"    echo system('echo -E '.shellescape(join(getline(a:firstline, a:lastline), ' ')).' | detex -l | sed ''s/ *\([ \.,;\:]\)/\1/g'' | xclip -selection clipboard')
+"endfunction
+"com -range=% -nargs=0 Detex :<line1>,<line2>call <SID>detex()
+"au FileType tex vmap <leader>g :Detex<CR>
 
 " =========================================================================== "
 " Auto Commands                                                               "
@@ -452,15 +457,17 @@ autocmd FileType make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 autocmd FileType tex,html,yaml,toml,pandoc,json,bib,css setlocal tabstop=2 shiftwidth=2 indentexpr=""
 
 " Remove trailing whitespace on write
-autocmd BufWritePre *
-    \ let _save_pos=getpos(".") |
-    \ let _s=@/ |
-    \ silent! %s/\s\+$//e |
-    \ let @/=_s |
-    \ unlet _s |
-    \ call setpos('.', _save_pos) |
-    \ unlet _save_pos |
-    \ noh
+autocmd BufWritePre * call <SID>remove_tailing_whitespace()
+function s:remove_tailing_whitespace()
+    let _save_pos=getpos(".")
+    let _s=@/
+    silent! %s/\s\+$//e
+    let @/=_s
+    unlet _s
+    call setpos('.', _save_pos)
+    unlet _save_pos
+    noh
+endfunction
 
 " =========================================================================== "
 " Plugin-Specific Settings                                                    "

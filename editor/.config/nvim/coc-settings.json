@@ -63,5 +63,5 @@
     "python.linting.pylintArgs": [],
     "rust-analyzer.inlayHints.chainingHints": false,
     "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-    "rust-analyzer.procMacro.enable": true
+    "rust-analyzer.procMacro.enable": true,
 }
