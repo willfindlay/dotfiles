@@ -17,7 +17,7 @@ BGLOC="$CACHEDIR/bg"
 NOTIF_DELAY=1000
 
 # User specified a file
-[ -f "$1" ] &&
+[ ! -z "$1" ] && [ -f "$1" ] &&
     ln -snfr "$(readlink -f "$1")" "$BGLOC" &&
     notify-send -i $(readlink -f "$BGLOC") "Changed wallpaper!" "$(readlink -f "$BGLOC")"
 
@@ -27,7 +27,7 @@ NOTIF_DELAY=1000
     notify-send -t $NOTIF_DELAY -i $(readlink -f "$BGLOC") "Random wallpaper chosen from $1!" "$(readlink -f "$BGLOC")."
 
 # Random wallpaper
-[ ! -z "$1" ] && [ "$1" == "random" ] &&
+[ -z "$1" ] &&
     ln -snfr "$(find "$(readlink -f "$WALLPAPERDIR")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$BGLOC" &&
     notify-send -t $NOTIF_DELAY -i $(readlink -f "$BGLOC") "Random wallpaper chosen!" "$(readlink -f "$BGLOC")."
 
