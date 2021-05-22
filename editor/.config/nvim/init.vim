@@ -106,6 +106,10 @@ Plug 'terryma/vim-multiple-cursors'
 " Make vim gitignore aware
 Plug 'vim-scripts/gitignore'
 
+Plug 'psf/black'
+
+Plug 'vim-scripts/SyntaxAttr.vim'
+
 " Diff conflicts
 function! s:do_git_diff_changes(info)
     system('git config --global merge.tool diffconflicts')
@@ -133,7 +137,7 @@ syntax on
 " Set colorscheme
 set background=dark
 let base16colorspace=256
-colorscheme base16-gruvbox-dark-hard
+colorscheme base16-default-dark
 
 " Don't replace background
 hi Normal ctermbg=NONE guibg=NONE
@@ -340,7 +344,7 @@ cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
 " cabbrev wq <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'w \| close' : 'wq')<CR>
 
 " Delete buffer without closing window
-command -bang Bd
+command! -bang Bd
             \ bp |
             \ if len(getbufinfo({'buflisted':1})) > 1 |
             \ bd<bang> # |
@@ -352,7 +356,7 @@ command -bang Bd
 cabbrev bd <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Bd' : 'bd')<CR>
 
 " Wipe buffer without closing window
-command -bang Bw
+command! -bang Bw
             \ bp |
             \ if len(getbufinfo({'buflisted':1})) > 1 |
             \ bw<bang> # |
@@ -368,7 +372,7 @@ cabbrev bw <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Bw' : 'bw')<CR>
 " =========================================================================== "
 
 " <leader>n to toggle nerdtree
-nmap <silent> <leader>n :NERDTreeToggleVCS<CR>
+nmap <silent> <leader>n :NERDTreeToggle<CR>
 
 " <leader>w to write file
 nmap <silent> <leader>w :w<CR>
@@ -501,7 +505,7 @@ let g:gutentags_ctags_extra_args = ['-R']
 " --------------
 
 " Color scheme
-let g:airline_theme='base16_gruvbox_dark_hard'
+let g:airline_theme='term'
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 0
@@ -573,19 +577,12 @@ command! -bang -nargs=* Rg
 
 let g:clang_format#auto_format = 1
 let g:clang_format#style_options = {
-            \ 'AllowShortIfStatementsOnASingleLine': 'false',
-            \ 'AllowShortFunctionsOnASingleLine': 'false',
-            \ 'AlignTrailingComments': 'true',
-            \ 'AlignEscapedNewlines': 'true',
-            \ 'AlignConsecutiveAssignments': 'false',
-            \ 'AlignConsecutiveMacros': 'true',
-            \ 'AllowAllArgumentsOnNextLine': 'true',
-            \ 'AllowAllParametersOfDeclarationOnNextLine': 'true',
-            \ 'DerivePointerAlignment': 'false',
-            \ 'PointerAlignment': 'Right',
+            \ 'BasedOnStyle': 'LLVM',
+            \ 'IndentWidth': 4,
+            \ 'UseTab': 'Never',
             \ 'BreakBeforeBraces': 'Linux',
-            \ 'SortIncludes': 'false',
-            \ 'PenaltyReturnTypeOnItsOwnLine': 0}
+            \ 'AllowShortIfStatementsOnASingleLine': 'false',
+            \ 'IndentCaseLabels': 'false'}
 
 " --------------
 "     vimtex
@@ -624,7 +621,7 @@ let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-python', 'coc-snippets'
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ <SID>check_back_space() ? "\<C-T>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-d>"
 
@@ -661,3 +658,9 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 let g:coc_enable_locationlist = 0
+
+" --------------
+"   SyntaxAttr
+" --------------
+
+command! SyntaxAttr :call SyntaxAttr()
