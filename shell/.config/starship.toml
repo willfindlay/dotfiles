@@ -1,4 +1,4 @@
-format = "$time$username[@](fg:8)$hostname[:](fg:8)$directory$git_branch$git_commit$git_state$git_status$character"
+format = "$time$username[@](fg:8)$hostname[:](fg:8)$directory$python$git_branch$git_commit$git_state$git_status$character"
 
 add_newline = false
 
@@ -12,7 +12,6 @@ style_user = "blue"
 [hostname]
 ssh_only = false
 disabled = false
-show_always = true
 format = "[$hostname]($style)"
 style = "blue"
 
@@ -32,3 +31,19 @@ error_symbol = "[|](red)"
 disabled = false
 format = '[\[$time\]](fg:8) '
 time_format = "%H:%M"
+
+[python]
+format = '[(\($symbol$virtualenv\) )](green)'
+
+[git_status]
+stashed = ''
+ahead = ''
+behind = ''
+diverged = ''
+conflicted = 'ﮏ'
+deleted = '✘'
+renamed = '»'
+modified = '!'
+staged = '+'
+untracked = '?'
+disabled = false
