@@ -103,11 +103,13 @@ then
     alias ls='exa'
     alias ll='exa -la'
     alias la='exa -A'
+    alias lst='ls --tree'
 else
     # Add color support to ls if we need it
     alias ls='ls --color=auto'
     alias l='ls'
     alias ll='ls -la'
+    alias lst='tree'
 fi
 
 # Map grep to ripgrep if it exists
@@ -204,7 +206,7 @@ function grammarly {
     detex -l "$1" | sed 's/ *\([ \.,;\:]\)/\1/g' | xclip -selection clipboard
 }
 
-function pdftotext {
+function pdftextcopy {
     command pdftotext "$1" - "${@:2}" | awk '/^$/ { print "\n"; } /./ { printf("%s ", $0); } END { print ""; }' | xclip -selection clipboard
 }
 
