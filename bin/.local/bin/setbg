@@ -11,7 +11,7 @@
 
 CACHEDIR=${XDG_CACHE_HOME:-$HOME/.cache}
 CONFIGDIR=$HOME/.config
-WALLPAPERDIR=$CONFIGDIR/wallpapers
+WALLPAPERDIR=$HOME/pictures/wallpapers
 BGLOC="$CACHEDIR/bg"
 
 NOTIF_DELAY=1000
@@ -21,17 +21,18 @@ NOTIF_DELAY=1000
     ln -snfr "$(readlink -f "$1")" "$BGLOC" &&
     notify-send -i $(readlink -f "$BGLOC") "Changed wallpaper!" "$(readlink -f "$BGLOC")"
 
-# User specified a file relative to $WALLPAPERDIR
-[ ! -z "$1" ] && [ -f "$WALLPAPERDIR/$1" ] &&
-    ln -snfr "$(readlink -f "$WALLPAPERDIR/$1")" "$BGLOC" &&
-    notify-send -t $NOTIF_DELAY -i $(readlink -f "$BGLOC") "Changed wallpaper!" "$(readlink -f "$BGLOC")"
+# User specified a directory
+[ ! -z "$1" ] && [ -d "$1" ] &&
+    ln -snfr "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$BGLOC" &&
+    notify-send -t $NOTIF_DELAY -i $(readlink -f "$BGLOC") "Random wallpaper chosen from $1!" "$(readlink -f "$BGLOC")."
 
-# User specified a subdirectory relative to $WALLPAPERDIR
-[ ! -z "$1" ] && [ -d "$WALLPAPERDIR/$1" ] &&
-    ln -snfr "$(find "$(readlink -f "$WALLPAPERDIR/$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$BGLOC" && notify-send -t $NOTIF_DELAY -i $(readlink -f "$BGLOC") "Random wallpaper chosen!" "$(readlink -f "$BGLOC")."
+# Random wallpaper
+[ ! -z "$1" ] && [ "$1" == "random" ] &&
+    ln -snfr "$(find "$(readlink -f "$WALLPAPERDIR")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$BGLOC" &&
+    notify-send -t $NOTIF_DELAY -i $(readlink -f "$BGLOC") "Random wallpaper chosen!" "$(readlink -f "$BGLOC")."
 
 # If pywal is installed and user specified PYWAL, use it
 [ ! -z $PYWAL ] && [ -x $(which wal 2>/dev/null) ] &&  echo "Running pywal..." &&
 wal -s -i "$(readlink -f "$BGLOC")" >/dev/null 2>&1 #-o "$CONFIGDIR/wal/postrun"
 
-xwallpaper --zoom "$BGLOC"
+feh --bg-fill "$BGLOC"
