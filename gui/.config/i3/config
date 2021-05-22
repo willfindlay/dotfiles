@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # font for i3-bar
-font pango:Inconsolata-dz for Powerline 7.5
+font pango:Inconsolata 7.5
 
 # hold mod and drag windows
 floating_modifier $mod
@@ -16,7 +16,7 @@ bindsym $mod+Shift+Return exec alacritty -d $(cat ~/.last_dir)
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec dmenu_run -fn 'Inconsolata-dz for Powerline:pixelsize=30'
+bindsym $mod+d exec dmenu_run -fn 'Meslo LGS:pixelsize=24'
 
 # change focus
 bindsym $mod+h focus left
