@@ -29,13 +29,11 @@
     "suggest.disableKind": true,
     "diagnostic.locationlist": false,
     "languageserver": {
-      "golang": {
-        "command": "gopls",
-        "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-        "filetypes": ["go"],
-        "initializationOptions": {
-          "usePlaceholders": true
-        }
+       "haskell": {
+       "command": "haskell-language-server-wrapper",
+       "args": ["--lsp"],
+       "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+       "filetypes": ["haskell", "lhaskell"]
       },
       "ccls": {
         "command": "ccls",
@@ -62,6 +60,5 @@
     },
     "python.linting.pylintArgs": [],
     "rust-analyzer.inlayHints.chainingHints": false,
-    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.procMacro.enable": true
 }

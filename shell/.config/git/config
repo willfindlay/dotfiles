@@ -3,7 +3,7 @@
     email = william@williamfindlay.com
     signingkey = 8F875C461867520BB67A66637162B44E9E560373
 [pull]
-    rebase = false
+	rebase = true
 [mergetool "diffconflicts"]
 	cmd = nvim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
 	trustExitCode = true

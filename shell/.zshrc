@@ -43,6 +43,8 @@ zstyle :compinstall filename $HOME/.zshrc
 
 autoload -Uz compinit
 compinit
+autoload bashcompinit
+bashcompinit
 # End of lines added by compinstall
 
 
@@ -77,7 +79,8 @@ stty -ixon
 
 
 # Carleton VPN for access to OpenStack clusters
-alias cuvpn='sudo openconnect -u $CARLETON_ID --protocol=anyconnect cuvpn.carleton.ca'
+alias cuvpn='pass carleton.ca | head -n 1 | sudo openconnect --passwd-on-stdin \
+    -u $CARLETON_ID --protocol=anyconnect cuvpn.carleton.ca'
 
 # Python3 default
 alias python='python3'
@@ -156,10 +159,27 @@ alias draw.io='run_detached draw.io'
 alias drawio='run_detached draw.io'
 alias libreoffice='run_detached libreoffice'
 
+# Download YouTube video with metadata, ignoring errors
+alias yt='youtube-dl --add-metadata -i'
+# Download just the audio of a YouTube video in best audio quality
+alias yta='yt -x -f bestaudio/best'
+
+alias crlf-fix="sed -i 's/$//'"
+
 # =========================================================================== #
 # Functions                                                                   #
 # =========================================================================== #
 
+# Convert a PDF document to PDF/A
+function pdfa {
+    gs -dPDFA -dBATCH -dNOPAUSE -sColorConversionStrategy=UseDeviceIndependentColor \
+        -sDEVICE=pdfwrite -dPDFACompatibilityPolicy=2 \
+        -sOutputFile=$(basename "$1" ".pdf").pdf.a $*
+}
+
+function mime {
+    file --mime-type -b $*
+}
 
 # Run a command detached from the terminal session
 function run_detached {
@@ -221,9 +241,6 @@ export EDITOR=nvim
 
 # Set display env
 #export DISPLAY=:0.0
-
-# Set gopath
-export GOPATH=$HOME/.local/go
 
 # Pipenv in project folder
 export PIPENV_VENV_IN_PROJECT=1

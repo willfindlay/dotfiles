@@ -110,6 +110,12 @@ Plug 'psf/black'
 
 Plug 'vim-scripts/SyntaxAttr.vim'
 
+" Justfile support
+Plug 'NoahTheDuke/vim-just'
+
+" Make vim Golang aware
+Plug 'fatih/vim-go'
+
 " Diff conflicts
 function! s:do_git_diff_changes(info)
     system('git config --global merge.tool diffconflicts')
@@ -250,7 +256,7 @@ if executable('rg')
 endif
 
 " =========================================================================== "
-" Override Dumb Key Bindings                                                  "
+" Custom Key Bindings                                                         "
 " =========================================================================== "
 
 " Bind ; to :
@@ -276,18 +282,25 @@ vnoremap <C-t> <C-t>zz
 " Center line on stack jumps
 nnoremap <c-o> <c-o>zz
 vnoremap <c-o> <c-o>zz
-nnoremap <c-u> <c-i>zz
-vnoremap <c-u> <c-i>zz
+nnoremap <c-i> <c-i>zz
+vnoremap <c-i> <c-i>zz
 
 " Center line on search
 nnoremap n nzzzv
 nnoremap N Nzzzv
+vnoremap n nzzzv
+vnoremap N Nzzzv
+
+" Aliases for zz, zt, and zb to match <s-h>, <s-m>, and <s-l>
+nnoremap z<s-h> zt
+nnoremap z<s-m> zz
+nnoremap z<s-l> zb
 
 " Better tabbing
-nnoremap <S-Tab> <<
-nnoremap <Tab> >>
-vnoremap <S-Tab> <gv
-vnoremap <Tab> >gv
+" nnoremap <S-Tab> <<
+" nnoremap <Tab> >>
+" vnoremap <S-Tab> <gv
+" vnoremap <Tab> >gv
 
 " Finally visual mode tabbing is no longer stupid
 vnoremap < <gv
@@ -338,11 +351,6 @@ nnoremap <F1> <NOP>
 " accidentally. To fully exit, :qa will do the trick.
 cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
 
-" This will automatically rebind :wq to :w | close, meaning we no longer exist vim
-" accidentally. To fully exit, :wqa will do the trick.
-" TODO: might remove this, I don't really care for it
-" cabbrev wq <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'w \| close' : 'wq')<CR>
-
 " Delete buffer without closing window
 command! -bang Bd
             \ bp |
@@ -366,10 +374,6 @@ command! -bang Bw
             \ endif
 " remap bw to our custom Bw command
 cabbrev bw <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Bw' : 'bw')<CR>
-
-" =========================================================================== "
-" Custom Key Bindings                                                         "
-" =========================================================================== "
 
 " <leader>n to toggle nerdtree
 nmap <silent> <leader>n :NERDTreeToggle<CR>
@@ -444,12 +448,6 @@ au FileType rust nmap <leader><s-t> :RustTest!<CR>
 autocmd FileType tex,bib nmap <leader>p :VimtexView<CR>
 autocmd FileType tex,bib nmap <leader>c :w!<CR>:VimtexCompileSS<CR>
 
-"function s:detex() range
-"    echo system('echo -E '.shellescape(join(getline(a:firstline, a:lastline), ' ')).' | detex -l | sed ''s/ *\([ \.,;\:]\)/\1/g'' | xclip -selection clipboard')
-"endfunction
-"com -range=% -nargs=0 Detex :<line1>,<line2>call <SID>detex()
-"au FileType tex vmap <leader>g :Detex<CR>
-
 " =========================================================================== "
 " Auto Commands                                                               "
 " =========================================================================== "
@@ -497,8 +495,17 @@ highlight GitGutterDelete ctermbg=NONE guibg=NONE
 "   gutentags
 " --------------
 
-let g:gutentags_cache_dir = '/tmp/tags'
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_project_info = []
+let g:gutentags_cache_dir = '/tmp/' . expand('$USER') . '/tags'
 let g:gutentags_ctags_extra_args = ['-R']
+" Work around https://github.com/ludovicchabant/vim-gutentags/issues/269 in git commits
+let g:gutentags_exclude_filetypes = ['gitcommit']
+let g:gutentags_exclude_filetypes = ['rust']
+
+" TODO: Use rusty-tags to generate tags for Rust
+" autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
+" autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
 
 " --------------
 "    airline
@@ -582,7 +589,8 @@ let g:clang_format#style_options = {
             \ 'UseTab': 'Never',
             \ 'BreakBeforeBraces': 'Linux',
             \ 'AllowShortIfStatementsOnASingleLine': 'false',
-            \ 'IndentCaseLabels': 'false'}
+            \ 'IndentCaseLabels': 'false',
+            \ 'AlignConsecutiveAssignments': 'Consecutive'}
 
 " --------------
 "     vimtex
@@ -615,13 +623,16 @@ set updatetime=300
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-let g:coc_config_home='$HOME/.config/nvim'
+" Disable semantic syntax highlighting
+let g:coc_default_semantic_highlight_groups = 0
+
+let g:coc_config_home = '$HOME/.config/nvim'
 
 let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-python', 'coc-snippets', 'coc-lists', 'coc-json']
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<C-T>" :
+      \ <SID>check_back_space() ? "\<C-t>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-d>"
 
