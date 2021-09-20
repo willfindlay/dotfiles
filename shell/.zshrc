@@ -74,9 +74,8 @@ stty -ixon
 
 
 # =========================================================================== #
-# Aliases                                                                     #
+# Aliases and Functions                                                       #
 # =========================================================================== #
-
 
 # Carleton VPN for access to OpenStack clusters
 alias cuvpn='pass carleton.ca | head -n 1 | sudo openconnect --passwd-on-stdin \
@@ -164,11 +163,21 @@ alias yt='youtube-dl --add-metadata -i'
 # Download just the audio of a YouTube video in best audio quality
 alias yta='yt -x -f bestaudio/best'
 
+# Fix CRLF line endings
 alias crlf-fix="sed -i 's/$//'"
 
-# =========================================================================== #
-# Functions                                                                   #
-# =========================================================================== #
+# Wrap websocat in rlwrap to enable readline
+alias websocat='rlwrap websocat'
+
+# Get the mime type associated with a file
+alias mime='file --mime-type -b'
+
+alias autorandr='autorandr --skip-options crtc,gamma'
+
+# Use xev to report key codes
+function keycodes {
+    xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+}
 
 # Convert a PDF document to PDF/A
 function pdfa {
@@ -177,11 +186,8 @@ function pdfa {
         -sOutputFile=$(basename "$1" ".pdf").pdf.a $*
 }
 
-function mime {
-    file --mime-type -b $*
-}
-
 # Run a command detached from the terminal session
+alias daemonize='run_detached'
 function run_detached {
     nohup $argv </dev/null &>/dev/null & disown
 }
@@ -228,6 +234,11 @@ function grammarly {
 
 function pdftextcopy {
     command pdftotext "$1" - "${@:2}" | awk '/^$/ { print "\n"; } /./ { printf("%s ", $0); } END { print ""; }' | xclip -selection clipboard
+}
+
+# List all packages that own a font
+function font-packages {
+    fc-list | awk '{gsub(":", ""); print $1}' | xargs paru -Qo {} 2>/dev/null | awk -F'is owned by ' '/is owned by / {print $2}' | sort | uniq | awk '{print $1}'
 }
 
 

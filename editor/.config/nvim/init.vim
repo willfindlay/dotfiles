@@ -428,10 +428,15 @@ vnoremap <leader>hl :syntax sync fromstart<CR>
 
 command! -nargs=0 NextDiagnostic :call CocAction('diagnosticNext')
 command! -nargs=0 PrevDiagnostic :call CocAction('diagnosticPrevious')
+command! -nargs=0 ShowDocumentation :call CocAction('definitionHover')
 
 nnoremap <leader>e     :NextDiagnostic<CR>
 nnoremap <leader><s-e> :PrevDiagnostic<CR>
 nnoremap <leader>d     :CocList diagnostics<CR>
+nnoremap <leader>a     :CocAction<CR>
+nnoremap <leader>k     :ShowDocumentation<CR>
+nnoremap <s-k>         :ShowDocumentation<CR>
+
 
 " Rust ----------------------------------------------------------------------
 
