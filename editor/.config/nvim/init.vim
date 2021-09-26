@@ -505,8 +505,7 @@ let g:gutentags_project_info = []
 let g:gutentags_cache_dir = '/tmp/' . expand('$USER') . '/tags'
 let g:gutentags_ctags_extra_args = ['-R']
 " Work around https://github.com/ludovicchabant/vim-gutentags/issues/269 in git commits
-let g:gutentags_exclude_filetypes = ['gitcommit']
-let g:gutentags_exclude_filetypes = ['rust']
+let g:gutentags_exclude_filetypes = ['gitcommit', 'rust']
 
 " TODO: Use rusty-tags to generate tags for Rust
 " autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
