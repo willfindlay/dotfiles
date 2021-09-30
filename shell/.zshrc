@@ -125,7 +125,7 @@ alias r='R'
 alias rscript='Rscript'
 
 # Scrot for screenshots
-alias scrot='scrot ~/pictures/screenshots/%m-%d_%H:%M:%S.png $ARGS'
+alias scrot='scrot ~/pictures/screenshots/%m_%d-%H_%M_%S.png $ARGS'
 
 # Better sudo
 alias sudo='sudo '
@@ -240,6 +240,14 @@ function pdftextcopy {
 function font-packages {
     fc-list | awk '{gsub(":", ""); print $1}' | xargs paru -Qo {} 2>/dev/null | awk -F'is owned by ' '/is owned by / {print $2}' | sort | uniq | awk '{print $1}'
 }
+
+# Copy a file to the system clipboard
+alias copy='xclip -selection clipboard'
+
+# Copy the system clipboard to stdout
+alias paste='xclip -o -selection clipboard'
+
+alias paru='paru --fm nvim'
 
 
 # =========================================================================== #
