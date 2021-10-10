@@ -1,5 +1,5 @@
 .PHONY: install
-install: zsh tmux git
+install: zsh tmux git starship
 
 .PHONY: git
 git:
@@ -14,3 +14,7 @@ zsh:
 .PHONY: tmux
 tmux:
 	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .tmux.conf $(HOME)/.tmux.conf
+
+.PHONY: starship
+starship:
+	rsync -ab --backup-dir=$(shell readlink -f ../backups/) .config/starship.toml $(HOME)/.config/starship.toml
