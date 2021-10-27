@@ -14,8 +14,9 @@
 	keepBackup = false
 [core]
     editor = nvim
-    autocrlf = input
-    safecrlf = true
+	autocrlf = input
+    #autocrlf = true
+    #safecrlf = false
 [filter "lfs"]
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process

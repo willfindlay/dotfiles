@@ -222,10 +222,13 @@ hide_edge_borders both
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Client assignments
-for_window [class = "^Spotify*"] move to workspace $ws9
+#for_window [class = "^Spotify*"] move to workspace $ws9
 assign [class = "Thunderbird"] $ws10
 assign [class = "discord"] $ws11
-for_window [class = "microsoft teams - preview"] move to workspace $ws12
+for_window [class="zoom"] floating enable
+for_window [class="zoom" title="Zoom Meeting"] floating disable
+for_window [class="zoom" title="Zoom - Licensed Account"] floating disable
+#for_window [class = "microsoft teams - preview"] move to workspace $ws12
 
 # Bind i3lock to mod shift x
 bindsym $mod+shift+x exec i3lock --color "$bg-color"

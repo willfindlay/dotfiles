@@ -78,8 +78,9 @@ stty -ixon
 # =========================================================================== #
 
 # Carleton VPN for access to OpenStack clusters
-alias cuvpn='pass carleton.ca | head -n 1 | sudo openconnect --passwd-on-stdin \
+alias cuvpn='{ pass root | head -n 1; pass carleton.ca | head -n 1} | sudo -S -k openconnect --passwd-on-stdin \
     -u $CARLETON_ID --protocol=anyconnect cuvpn.carleton.ca'
+alias openstack='{ run_detached xdg-open https://openstack-stein.scs.carleton.ca/ } && cuvpn'
 
 # Python3 default
 alias python='python3'
@@ -88,15 +89,16 @@ alias pip='pip3'
 # Makefiles
 alias m='make'
 
+# Always use floats in bc
 alias bc='bc -l'
 
 # Map vim to nvim if it exists
 if command -v nvim > /dev/null
 then
     alias vim='nvim'
-    alias vi='vim'
-    alias v='vim'
 fi
+alias vi='vim'
+alias v='vim'
 
 # Map ls to exa if it exists
 if command -v exa > /dev/null
@@ -130,9 +132,6 @@ alias scrot='scrot ~/pictures/screenshots/%m_%d-%H_%M_%S.png $ARGS'
 # Better sudo
 alias sudo='sudo '
 
-# Stupid perf trace ugh
-alias trace='/usr/share/bcc/tools/trace'
-
 # Some of Jon Gjengset's aliases from his fish configs:
 alias o='xdg-open'
 alias g='git'
@@ -142,9 +141,10 @@ alias gah='git stash && git pull --rebase && git stash pop'
 alias yr='cal -y'
 alias rc='source $HOME/.zshrc'
 
-# rlwrap
+# rlwrap aliases
 if command -v rlwrap > /dev/null
 then
+    # scheme with rlwrap and MIT scheme bindings
     alias scheme='rlwrap -r -c -f $HOME/.cache/mit_scheme_bindings.txt scheme'
 fi
 
@@ -156,6 +156,7 @@ alias firefox='run_detached firefox'
 alias zathura='run_detached zathura'
 alias draw.io='run_detached draw.io'
 alias drawio='run_detached draw.io'
+alias vlc='run_detached vlc'
 alias libreoffice='run_detached libreoffice'
 
 # Download YouTube video with metadata, ignoring errors
@@ -209,20 +210,18 @@ function gr {
     done
 }
 
-# Limit process execution to two cores
-function limit {
-    numactl -C 0,1 $argv
-}
-
 # Like cd but resolves links first
 function lcd {
     cd $(readlink -f $argv)
 }
 
+# Generate a vmlinux.h file for your kernel and print it to stdout
+# Most commonly, you want to redirect this like `vmlinux > vmlinux.h`
 function vmlinux {
     bpftool btf dump file /sys/kernel/btf/vmlinux format c
 }
 
+# Crop an image by whitespace
 function crop-image {
     convert $1 -trim +repage $1
 }
@@ -232,6 +231,7 @@ function grammarly {
     detex -l "$1" | sed 's/ *\([ \.,;\:]\)/\1/g' | xclip -selection clipboard
 }
 
+# Convert a PDF file to plaintext and copy
 function pdftextcopy {
     command pdftotext "$1" - "${@:2}" | awk '/^$/ { print "\n"; } /./ { printf("%s ", $0); } END { print ""; }' | xclip -selection clipboard
 }
@@ -247,7 +247,16 @@ alias copy='xclip -selection clipboard'
 # Copy the system clipboard to stdout
 alias paste='xclip -o -selection clipboard'
 
+# Use vim nvim as our PKGBUILD editor in paru
 alias paru='paru --fm nvim'
+
+# Convert a markdown file to wiki
+function wikify() {
+    pandoc -f markdown -t mediawiki $1 -o ${1%.md}.wiki
+}
+
+# Bluetoothctl
+alias bt='bluetoothctl'
 
 
 # =========================================================================== #
@@ -257,9 +266,6 @@ alias paru='paru --fm nvim'
 
 # Set editor and browser
 export EDITOR=nvim
-
-# Set display env
-#export DISPLAY=:0.0
 
 # Pipenv in project folder
 export PIPENV_VENV_IN_PROJECT=1
@@ -282,7 +288,6 @@ export SXHKD_SHELL=/usr/bin/bash
 
 # Rust stuff
 export CARGO_INCREMENTAL=1
-export RUSTFLAGS="-C target-cpu=native"
 export RUST_BACKTRACE=1
 
 # Handy for debugging

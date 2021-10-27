@@ -18,7 +18,9 @@ au FileType * setlocal wrapmargin=0
 " Spelling
 set spellfile=~/.config/nvim/en.utf-8.add
 set spelllang=en_ca
-au FileType rmd,tex,markdown,pandoc setlocal spell
+au FileType rmd,tex,markdown,pandoc,mediawiki,text setlocal spell
+
+set foldlevel=99
 
 " =========================================================================== "
 " Plugins                                                                     "
@@ -62,8 +64,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'lervag/vimtex'
 
 " Pandoc
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Tabularize all the things
 Plug 'godlygeek/tabular'
@@ -116,6 +118,9 @@ Plug 'NoahTheDuke/vim-just'
 " Make vim Golang aware
 Plug 'fatih/vim-go'
 
+" Mediawiki
+Plug 'm-pilia/vim-mediawiki'
+
 " Diff conflicts
 function! s:do_git_diff_changes(info)
     system('git config --global merge.tool diffconflicts')
@@ -167,6 +172,9 @@ hi DiffFile    ctermbg=NONE guibg=NONE
 hi DiffNewFile ctermbg=NONE guibg=NONE
 hi DiffLine    ctermbg=NONE guibg=NONE
 hi DiffRemoved ctermbg=NONE guibg=NONE
+
+" Rust type hints and inlay hints
+highlight! link CocHintSign Comment
 
 call Base16hi("Comment", g:base16_gui03, "", g:base16_cterm03, "", "", "")
 highlight! link SpecialComment Comment
@@ -437,11 +445,19 @@ nnoremap <leader>a     :CocAction<CR>
 nnoremap <leader>k     :ShowDocumentation<CR>
 nnoremap <s-k>         :ShowDocumentation<CR>
 
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 
 " Rust ----------------------------------------------------------------------
 
 " <leader>r to reload rust analyzer
 au FileType rust nmap <leader>r :CocCommand rust-analyzer.reload<CR>
+
+" <leader>i to toggle inlay hints
+au FileType rust nmap <leader>i :CocCommand rust-analyzer.toggleInlayHints<CR>
 
 " <leader>t to run test under cursor and <leader><s-t> to run all tests
 au FileType rust nmap <leader>t :RustTest<CR>
@@ -452,6 +468,7 @@ au FileType rust nmap <leader><s-t> :RustTest!<CR>
 " <leader>p to launch a preview and <leader>c to compile
 autocmd FileType tex,bib nmap <leader>p :VimtexView<CR>
 autocmd FileType tex,bib nmap <leader>c :w!<CR>:VimtexCompileSS<CR>
+autocmd FileType tex,bib nmap <leader><s-C> :VimtexClean<CR>
 
 " =========================================================================== "
 " Auto Commands                                                               "
@@ -552,6 +569,7 @@ let g:pandoc#folding#fdc = 0
 " --------------
 
 let g:rustfmt_autosave = 1
+let g:rustfmt_command = "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rustfmt"
 
 " --------------
 "    nerdtree
