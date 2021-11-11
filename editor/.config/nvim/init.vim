@@ -569,7 +569,6 @@ let g:pandoc#folding#fdc = 0
 " --------------
 
 let g:rustfmt_autosave = 1
-let g:rustfmt_command = "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rustfmt"
 
 " --------------
 "    nerdtree
